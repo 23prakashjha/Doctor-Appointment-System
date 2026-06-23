@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
-import { 
-  Menu, 
-  X, 
-  User, 
-  Stethoscope, 
+import {
+  Menu,
+  X,
+  User,
+  Stethoscope,
   Calendar,
   CreditCard,
   Star,
@@ -13,7 +13,11 @@ import {
   Settings,
   LogOut,
   Bell,
-  Search
+  Search,
+  ChevronDown,
+  Heart,
+  Shield,
+  Clock
 } from 'lucide-react'
 
 const Navbar = () => {
@@ -28,7 +32,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -47,176 +50,114 @@ const Navbar = () => {
   const getDashboardLink = () => {
     if (!user) return '/login'
     switch (user.role) {
-      case 'doctor':
-        return '/dashboard/doctor'
-      case 'admin':
-        return '/dashboard/admin'
-      default:
-        return '/dashboard/user'
+      case 'doctor': return '/dashboard/doctor'
+      case 'admin': return '/dashboard/admin'
+      default: return '/dashboard/user'
     }
   }
 
   const getProfileMenuItems = () => {
     if (!user) return []
-
     const baseItems = [
-      {
-        label: 'Dashboard',
-        icon: <Calendar className="w-4 h-4" />,
-        href: getDashboardLink(),
-      },
-      {
-        label: 'Profile',
-        icon: <User className="w-4 h-4" />,
-        href: user.role === 'doctor' ? '/dashboard/doctor/profile' : '/dashboard/user/profile',
-      },
+      { label: 'Dashboard', icon: <Calendar className="w-4 h-4" />, href: getDashboardLink() },
+      { label: 'Profile', icon: <User className="w-4 h-4" />, href: user.role === 'doctor' ? '/dashboard/doctor/profile' : '/dashboard/user/profile' },
     ]
-
     if (user.role === 'user') {
       baseItems.push(
-        {
-          label: 'Appointments',
-          icon: <Calendar className="w-4 h-4" />,
-          href: '/dashboard/user/appointments',
-        },
-        {
-          label: 'Payments',
-          icon: <CreditCard className="w-4 h-4" />,
-          href: '/dashboard/user/payments',
-        },
-        {
-          label: 'Reviews',
-          icon: <Star className="w-4 h-4" />,
-          href: '/dashboard/user/reviews',
-        }
+        { label: 'Appointments', icon: <Calendar className="w-4 h-4" />, href: '/dashboard/user/appointments' },
+        { label: 'Payments', icon: <CreditCard className="w-4 h-4" />, href: '/dashboard/user/payments' },
+        { label: 'Reviews', icon: <Star className="w-4 h-4" />, href: '/dashboard/user/reviews' }
       )
     } else if (user.role === 'doctor') {
       baseItems.push(
-        {
-          label: 'My Appointments',
-          icon: <Calendar className="w-4 h-4" />,
-          href: '/dashboard/doctor/appointments',
-        },
-        {
-          label: 'Patients',
-          icon: <User className="w-4 h-4" />,
-          href: '/dashboard/doctor/patients',
-        },
-        {
-          label: 'Earnings',
-          icon: <CreditCard className="w-4 h-4" />,
-          href: '/dashboard/doctor/earnings',
-        }
+        { label: 'My Appointments', icon: <Calendar className="w-4 h-4" />, href: '/dashboard/doctor/appointments' },
+        { label: 'Patients', icon: <User className="w-4 h-4" />, href: '/dashboard/doctor/patients' },
+        { label: 'Earnings', icon: <CreditCard className="w-4 h-4" />, href: '/dashboard/doctor/earnings' }
       )
     }
-
     baseItems.push(
-      {
-        label: 'Settings',
-        icon: <Settings className="w-4 h-4" />,
-        href: '/dashboard/settings',
-      },
-      {
-        label: 'Logout',
-        icon: <LogOut className="w-4 h-4" />,
-        onClick: handleLogout,
-        className: 'text-red-600 hover:text-red-700 hover:bg-red-50',
-      }
+      { label: 'Settings', icon: <Settings className="w-4 h-4" />, href: '/dashboard/settings' },
+      { label: 'Logout', icon: <LogOut className="w-4 h-4" />, onClick: handleLogout, className: 'text-red-600 hover:text-red-700 hover:bg-red-50' }
     )
-
     return baseItems
   }
 
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'Find Doctors', href: '/doctors' },
+    { label: 'Health Blogs', href: '/blogs' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ]
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled
+        ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-gray-200/50 border-b border-gray-100/50'
+        : 'bg-transparent'
     }`}>
       <div className="container-custom">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Stethoscope className="w-8 h-8 text-primary-600" />
-            <span className="text-xl font-bold text-gray-900">DocCare</span>
+          <Link to="/" className="flex items-center space-x-2.5 group">
+            <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-primary-500/40 transition-all duration-300 group-hover:scale-105">
+              <Stethoscope className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text">
+              DocCare
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className={`text-gray-700 hover:text-primary-600 transition-colors ${
-                location.pathname === '/' ? 'text-primary-600 font-medium' : ''
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/doctors"
-              className={`text-gray-700 hover:text-primary-600 transition-colors ${
-                location.pathname === '/doctors' ? 'text-primary-600 font-medium' : ''
-              }`}
-            >
-              Find Doctors
-            </Link>
-            <Link
-              to="/blogs"
-              className={`text-gray-700 hover:text-primary-600 transition-colors ${
-                location.pathname === '/blogs' ? 'text-primary-600 font-medium' : ''
-              }`}
-            >
-              Health Blogs
-            </Link>
-            <Link
-              to="/about"
-              className={`text-gray-700 hover:text-primary-600 transition-colors ${
-                location.pathname === '/about' ? 'text-primary-600 font-medium' : ''
-              }`}
-            >
-              About Us
-            </Link>
-            <Link
-              to="/contact"
-              className={`text-gray-700 hover:text-primary-600 transition-colors ${
-                location.pathname === '/contact' ? 'text-primary-600 font-medium' : ''
-              }`}
-            >
-              Contact
-            </Link>
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`nav-link px-4 py-2 text-sm ${
+                  location.pathname === link.href ? 'active' : ''
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             {isAuthenticated ? (
               <>
-                {/* Notifications */}
-                <button className="relative p-2 text-gray-600 hover:text-primary-600 transition-colors">
+                <button className="relative p-2.5 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all duration-200">
                   <Bell className="w-5 h-5" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
                 </button>
 
-                {/* Profile Dropdown */}
                 <div className="relative">
                   <button
                     onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                    className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="flex items-center space-x-2 p-1.5 pr-3 rounded-xl hover:bg-gray-100/80 transition-all duration-200 border border-transparent hover:border-gray-200"
                   >
-                    <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-medium">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-full flex items-center justify-center shadow-sm">
+                      <span className="text-white text-sm font-semibold">
                         {user?.name?.charAt(0)?.toUpperCase()}
                       </span>
                     </div>
-                    <span className="text-sm font-medium text-gray-700">{user?.name}</span>
+                    <span className="text-sm font-medium text-gray-700">{user?.name?.split(' ')[0]}</span>
+                    <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   {isProfileMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2">
+                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 animate-fade-in-down">
+                      <div className="px-4 py-3 border-b border-gray-100">
+                        <p className="text-sm font-semibold text-gray-900">{user?.name}</p>
+                        <p className="text-xs text-gray-500 capitalize">{user?.role}</p>
+                      </div>
                       {getProfileMenuItems().map((item, index) => (
                         <div key={index}>
                           {item.href ? (
                             <Link
                               to={item.href}
-                              className={`flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors ${
-                                item.className || ''
-                              }`}
+                              className={`flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors ${item.className || ''}`}
                               onClick={() => setIsProfileMenuOpen(false)}
                             >
                               {item.icon}
@@ -225,9 +166,7 @@ const Navbar = () => {
                           ) : (
                             <button
                               onClick={item.onClick}
-                              className={`flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors w-full text-left ${
-                                item.className || ''
-                              }`}
+                              className={`flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors w-full text-left ${item.className || ''}`}
                             >
                               {item.icon}
                               <span>{item.label}</span>
@@ -240,117 +179,105 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <div className="flex items-center space-x-4">
-                <Link
-                  to="/login"
-                  className="text-gray-700 hover:text-primary-600 transition-colors font-medium"
-                >
+              <>
+                <Link to="/login" className="btn-ghost text-sm font-medium">
                   Login
                 </Link>
                 <Link
                   to="/doctor-register"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center"
+                  className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-xl border-2 border-primary-200 text-primary-700 hover:bg-primary-50 hover:border-primary-300 transition-all duration-200"
                 >
-                  <Stethoscope className="w-4 h-4 mr-2" />
-                  Register as Doctor
+                  <Stethoscope className="w-4 h-4 mr-1.5" />
+                  For Doctors
                 </Link>
-                <Link
-                  to="/register"
-                  className="btn-primary"
-                >
+                <Link to="/register" className="btn-primary btn-sm shadow-lg shadow-primary-500/20">
                   Sign Up
                 </Link>
-              </div>
+              </>
             )}
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-600 hover:text-primary-600 transition-colors"
+            className={`md:hidden p-2.5 rounded-xl transition-all duration-200 ${
+              isMenuOpen ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-100'
+            }`}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="space-y-3">
+        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+          isMenuOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0 py-0'
+        }`}>
+          <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-100 p-4 space-y-1">
+            {navLinks.map((link) => (
               <Link
-                to="/"
-                className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                key={link.href}
+                to={link.href}
+                className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  location.pathname === link.href
+                    ? 'bg-primary-50 text-primary-700'
+                    : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
+                }`}
               >
-                Home
+                {link.label}
               </Link>
-              <Link
-                to="/doctors"
-                className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                Find Doctors
-              </Link>
-              <Link
-                to="/blogs"
-                className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                Health Blogs
-              </Link>
-              <Link
-                to="/about"
-                className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                About Us
-              </Link>
-              <Link
-                to="/contact"
-                className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                Contact
-              </Link>
-              
+            ))}
+
+            <div className="border-t border-gray-100 pt-3 mt-3 space-y-2">
               {isAuthenticated ? (
                 <>
-                  <div className="border-t border-gray-200 pt-3">
-                    <Link
-                      to={getDashboardLink()}
-                      className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
-                    >
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      Logout
-                    </button>
+                  <div className="flex items-center space-x-3 px-4 py-3 bg-gray-50 rounded-xl">
+                    <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-full flex items-center justify-center">
+                      <span className="text-white font-semibold">{user?.name?.charAt(0)?.toUpperCase()}</span>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">{user?.name}</p>
+                      <p className="text-xs text-gray-500 capitalize">{user?.role}</p>
+                    </div>
                   </div>
+                  <Link
+                    to={getDashboardLink()}
+                    className="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    Logout
+                  </button>
                 </>
               ) : (
-                <div className="border-t border-gray-200 pt-3 space-y-2">
+                <>
                   <Link
                     to="/login"
-                    className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                    className="block w-full text-center px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                   >
                     Login
                   </Link>
                   <Link
                     to="/doctor-register"
-                    className="block mx-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+                    className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold border-2 border-primary-200 text-primary-700 hover:bg-primary-50 transition-all duration-200"
                   >
-                    <Stethoscope className="w-4 h-4 mr-2" />
+                    <Stethoscope className="w-4 h-4 inline mr-1.5" />
                     Register as Doctor
                   </Link>
                   <Link
                     to="/register"
-                    className="block mx-4 btn-primary text-center"
+                    className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary-600 to-purple-600 text-white hover:shadow-lg transition-all duration-200"
                   >
                     Sign Up
                   </Link>
-                </div>
+                </>
               )}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   )

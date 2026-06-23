@@ -1,21 +1,14 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock,
-  Send,
-  MessageSquare,
-  User,
-  Building
+import {
+  Phone, Mail, MapPin, Clock, Send, MessageSquare, User, Sparkles, ChevronRight
 } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false)
-  
+
   const {
     register,
     handleSubmit,
@@ -26,7 +19,6 @@ const Contact = () => {
   const onSubmit = async (data) => {
     setIsLoading(true)
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
       toast.success('Message sent successfully! We\'ll get back to you soon.')
       reset()
@@ -38,47 +30,16 @@ const Contact = () => {
   }
 
   const contactInfo = [
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+1 (555) 123-4567',
-      description: 'Mon-Fri 9AM-6PM EST'
-    },
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'support@doccare.com',
-      description: 'We respond within 24 hours'
-    },
-    {
-      icon: MapPin,
-      label: 'Address',
-      value: '123 Healthcare Ave, Medical District, MD 12345',
-      description: 'Visit our office'
-    }
+    { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', desc: 'Mon-Fri 9AM-6PM EST', gradient: 'from-blue-500 to-cyan-500' },
+    { icon: Mail, label: 'Email', value: 'support@doccare.com', desc: 'We respond within 24 hours', gradient: 'from-purple-500 to-pink-500' },
+    { icon: MapPin, label: 'Address', value: '123 Healthcare Ave, Medical District, MD 12345', desc: 'Visit our office', gradient: 'from-green-500 to-emerald-500' },
   ]
 
   const faqs = [
-    {
-      question: 'How do I book an appointment?',
-      answer: 'You can book an appointment by searching for doctors, selecting your preferred doctor, and choosing an available time slot. You\'ll need to create an account and provide basic information.'
-    },
-    {
-      question: 'What payment methods are accepted?',
-      answer: 'We accept all major credit cards, debit cards, UPI, and net banking. All payments are processed securely through Razorpay.'
-    },
-    {
-      question: 'Can I cancel or reschedule my appointment?',
-      answer: 'Yes, you can cancel or reschedule your appointment up to 2 hours before the scheduled time through your dashboard.'
-    },
-    {
-      question: 'Are the doctors on your platform verified?',
-      answer: 'Yes, all doctors on our platform are verified and have valid medical licenses. We also check their credentials and experience.'
-    },
-    {
-      question: 'Is my medical information secure?',
-      answer: 'Absolutely. We use industry-standard encryption and security measures to protect your personal and medical information.'
-    }
+    { q: 'How do I book an appointment?', a: 'You can book an appointment by searching for doctors, selecting your preferred doctor, and choosing an available time slot.' },
+    { q: 'What payment methods are accepted?', a: 'We accept all major credit cards, debit cards, UPI, and net banking. All payments are processed securely through Razorpay.' },
+    { q: 'Can I cancel or reschedule my appointment?', a: 'Yes, you can cancel or reschedule your appointment up to 2 hours before the scheduled time through your dashboard.' },
+    { q: 'Are the doctors on your platform verified?', a: 'Yes, all doctors on our platform are verified and have valid medical licenses.' },
   ]
 
   return (
@@ -88,216 +49,138 @@ const Contact = () => {
         <meta name="description" content="Get in touch with DocCare support team for any questions or assistance." />
       </Helmet>
 
-      <div className="pt-16 bg-gray-50 min-h-screen">
+      <div className="pt-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
         <div className="container-custom section-padding">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+              <Sparkles className="w-4 h-4 mr-1.5" />
               Get in Touch
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+              Contact Us
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Have questions or need assistance? We're here to help. 
-              Reach out to us through any of the following channels.
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+              Have questions or need assistance? We're here to help.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact Information */}
-            <div className="lg:col-span-1">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-                Contact Information
-              </h2>
-              
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon
-                  return (
-                    <div key={index} className="flex items-start">
-                      <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                        <Icon className="w-6 h-6 text-primary-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900 mb-1">
-                          {info.label}
-                        </h3>
-                        <p className="text-gray-900 mb-1">{info.value}</p>
-                        <p className="text-sm text-gray-600">{info.description}</p>
-                      </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {/* Contact Info */}
+            <div className="lg:col-span-1 space-y-6">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary-100 transition-all duration-300 group">
+                  <div className="flex items-start">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${info.gradient} rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <info.icon className="w-6 h-6 text-white" />
                     </div>
-                  )
-                })}
-              </div>
+                    <div>
+                      <h3 className="font-bold text-gray-900 mb-1">{info.label}</h3>
+                      <p className="text-gray-900 mb-1 text-sm">{info.value}</p>
+                      <p className="text-sm text-gray-500">{info.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
 
               {/* Office Hours */}
-              <div className="mt-8 p-6 bg-white rounded-lg shadow-sm">
+              <div className="bg-white rounded-2xl p-6 border border-gray-100">
                 <div className="flex items-center mb-4">
-                  <Clock className="w-6 h-6 text-primary-600 mr-2" />
-                  <h3 className="font-semibold text-gray-900">Office Hours</h3>
+                  <Clock className="w-5 h-5 text-primary-600 mr-2" />
+                  <h3 className="font-bold text-gray-900">Office Hours</h3>
                 </div>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Friday</span>
-                    <span className="text-gray-900">9:00 AM - 6:00 PM</span>
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-500">Monday - Friday</span>
+                    <span className="font-semibold text-gray-900">9:00 AM - 6:00 PM</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Saturday</span>
-                    <span className="text-gray-900">10:00 AM - 4:00 PM</span>
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-500">Saturday</span>
+                    <span className="font-semibold text-gray-900">10:00 AM - 4:00 PM</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Sunday</span>
-                    <span className="text-gray-900">Closed</span>
+                  <div className="flex justify-between py-2">
+                    <span className="text-gray-500">Sunday</span>
+                    <span className="font-semibold text-gray-900">Closed</span>
                   </div>
                 </div>
               </div>
 
-              {/* Emergency Contact */}
-              <div className="mt-6 p-4 bg-error-50 border border-error-200 rounded-lg">
-                <h3 className="font-semibold text-error-800 mb-2">
-                  Emergency Support
-                </h3>
-                <p className="text-error-700 text-sm mb-2">
-                  For medical emergencies, please call:
-                </p>
-                <p className="text-error-900 font-bold">911 or your local emergency number</p>
+              {/* Emergency */}
+              <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl p-6 border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">🚨 Emergency Support</h3>
+                <p className="text-red-700 text-sm mb-2">For medical emergencies, please call:</p>
+                <p className="text-red-900 font-bold text-lg">911 or your local emergency number</p>
               </div>
             </div>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-                  Send us a Message
-                </h2>
-                
+              <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 sm:p-10">
+                <h2 className="text-2xl font-bold text-gray-900 mb-8">Send us a Message</h2>
+
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Your Name *
-                      </label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Your Name *</label>
                       <div className="relative">
-                        <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                        <input
-                          {...register('name', {
-                            required: 'Name is required',
-                            minLength: {
-                              value: 2,
-                              message: 'Name must be at least 2 characters',
-                            },
-                          })}
-                          type="text"
-                          className="input pl-10"
-                          placeholder="John Doe"
-                        />
+                        <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
+                        <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" className="input pl-11" placeholder="John Doe" />
                       </div>
-                      {errors.name && (
-                        <p className="mt-1 text-sm text-error-600">{errors.name.message}</p>
-                      )}
+                      {errors.name && <p className="mt-1 text-sm text-error-600">{errors.name.message}</p>}
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                      </label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address *</label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                        <input
-                          {...register('email', {
-                            required: 'Email is required',
-                            pattern: {
-                              value: /^\S+@\S+$/i,
-                              message: 'Invalid email address',
-                            },
-                          })}
-                          type="email"
-                          className="input pl-10"
-                          placeholder="john@example.com"
-                        />
+                        <Mail className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
+                        <input {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })} type="email" className="input pl-11" placeholder="john@example.com" />
                       </div>
-                      {errors.email && (
-                        <p className="mt-1 text-sm text-error-600">{errors.email.message}</p>
-                      )}
+                      {errors.email && <p className="mt-1 text-sm text-error-600">{errors.email.message}</p>}
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
-                    </label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                      <input
-                        {...register('phone', {
-                          pattern: {
-                            value: /^[0-9]{10}$/,
-                            message: 'Please enter a valid 10-digit phone number',
-                          },
-                        })}
-                        type="tel"
-                        className="input pl-10"
-                        placeholder="(555) 123-4567"
-                      />
+                      <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
+                      <input {...register('phone', { pattern: { value: /^[0-9]{10}$/, message: 'Valid 10-digit number' } })} type="tel" className="input pl-11" placeholder="(555) 123-4567" />
                     </div>
-                    {errors.phone && (
-                      <p className="mt-1 text-sm text-error-600">{errors.phone.message}</p>
-                    )}
+                    {errors.phone && <p className="mt-1 text-sm text-error-600">{errors.phone.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
-                    </label>
-                    <select
-                      {...register('subject', {
-                        required: 'Please select a subject',
-                      })}
-                      className="input"
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Subject *</label>
+                    <select {...register('subject', { required: 'Select a subject' })} className="input">
                       <option value="">Select a subject</option>
                       <option value="general">General Inquiry</option>
                       <option value="appointment">Appointment Issue</option>
                       <option value="payment">Payment Question</option>
                       <option value="technical">Technical Support</option>
                       <option value="feedback">Feedback</option>
-                      <option value="other">Other</option>
                     </select>
-                    {errors.subject && (
-                      <p className="mt-1 text-sm text-error-600">{errors.subject.message}</p>
-                    )}
+                    {errors.subject && <p className="mt-1 text-sm text-error-600">{errors.subject.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
-                    </label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Message *</label>
                     <div className="relative">
-                      <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                      <textarea
-                        {...register('message', {
-                          required: 'Message is required',
-                          minLength: {
-                            value: 10,
-                            message: 'Message must be at least 10 characters',
-                          },
-                        })}
-                        rows={5}
-                        className="input pl-10 resize-none"
-                        placeholder="How can we help you?"
-                      />
+                      <MessageSquare className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
+                      <textarea {...register('message', { required: 'Message is required', minLength: { value: 10, message: 'Min 10 characters' } })} rows={5} className="input pl-11 resize-none" placeholder="How can we help you?" />
                     </div>
-                    {errors.message && (
-                      <p className="mt-1 text-sm text-error-600">{errors.message.message}</p>
-                    )}
+                    {errors.message && <p className="mt-1 text-sm text-error-600">{errors.message.message}</p>}
                   </div>
 
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full btn-primary btn-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-primary-600 to-purple-600 text-white py-3.5 rounded-xl font-bold hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {isLoading ? (
                       <>
-                        <div className="spinner w-5 h-5 mr-2"></div>
+                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
                         Sending...
                       </>
                     ) : (
@@ -312,48 +195,41 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* FAQ Section */}
-          <div className="mt-16">
+          {/* FAQ */}
+          <div className="mt-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-gray-600">
-                Quick answers to common questions
-              </p>
+              <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+                <MessageSquare className="w-4 h-4 mr-1.5" />
+                FAQ
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">Quick Answers</h2>
+              <p className="text-gray-600">Frequently asked questions</p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-sm p-6">
-                  <h3 className="font-semibold text-gray-900 mb-3">
-                    {faq.question}
+                <div key={index} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary-100 transition-all duration-300">
+                  <h3 className="font-bold text-gray-900 mb-2 flex items-start">
+                    <ChevronRight className="w-5 h-5 text-primary-600 mr-2 flex-shrink-0 mt-0.5" />
+                    {faq.q}
                   </h3>
-                  <p className="text-gray-600">
-                    {faq.answer}
-                  </p>
+                  <p className="text-gray-600 text-sm pl-7">{faq.a}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Location Map */}
-          <div className="mt-16">
+          {/* Map */}
+          <div className="mt-20">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Visit Our Office
-              </h2>
-              <p className="text-gray-600">
-                Find us at our headquarters in Medical District
-              </p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">Visit Our Office</h2>
+              <p className="text-gray-600">Find us at our headquarters in Medical District</p>
             </div>
-            
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-              <div className="aspect-w-16 aspect-h-9 bg-gray-200 flex items-center justify-center">
+            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg">
+              <div className="aspect-[16/7] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                 <div className="text-center">
-                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Interactive Map</p>
-                  <p className="text-sm text-gray-500">123 Healthcare Ave, Medical District, MD 12345</p>
+                  <MapPin className="w-16 h-16 text-primary-600 mx-auto mb-4" />
+                  <p className="text-lg font-bold text-gray-900">DocCare Headquarters</p>
+                  <p className="text-gray-600">123 Healthcare Ave, Medical District, MD 12345</p>
                 </div>
               </div>
             </div>
