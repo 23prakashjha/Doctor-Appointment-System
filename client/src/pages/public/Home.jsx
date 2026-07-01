@@ -24,21 +24,17 @@ import {
   ArrowRight,
   Zap,
   Target,
-  Globe,
   Lock,
   User,
   MessageCircle,
-  ChevronDown,
   Send,
   BookOpen,
   HelpCircle,
   Plus,
-  Minus,
-  Sparkles,
-  DollarSign,
-  Smartphone
+  Sparkles
 } from 'lucide-react'
-import { doctorService, diseaseService, blogService } from '../../services/api'
+import doctorsData from '../../data/doctors.json'
+import blogsData from '../../data/blogs.json'
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -52,23 +48,12 @@ const Home = () => {
   const [email, setEmail] = useState('')
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [doctorsRes, diseasesRes, blogsRes] = await Promise.all([
-          doctorService.getAllDoctors({ limit: 6, sortBy: 'rating' }),
-          diseaseService.getPopularDiseases({ limit: 8 }),
-          blogService.getFeaturedBlogs({ limit: 3 })
-        ])
-        setFeaturedDoctors(doctorsRes.data.data.doctors || [])
-        setPopularDiseases(diseasesRes.data.data.diseases || [])
-        setRecentBlogs(blogsRes.data.data.blogs || [])
-      } catch (error) {
-        console.error('Failed to fetch home data:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchData()
+    const topDoctors = doctorsData.doctors.sort((a, b) => b.rating - a.rating).slice(0, 6)
+    const recentBlogsList = blogsData.blogs.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+    setFeaturedDoctors(topDoctors)
+    setRecentBlogs(recentBlogsList)
+    setPopularDiseases([])
+    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -526,18 +511,18 @@ const Home = () => {
           ) : featuredDoctors.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredDoctors.map((doctor) => (
-                <div key={doctor._id} className="group">
+                <div key={doctor.id} className="group">
                   <div className="bg-white rounded-2xl border border-gray-100 group-hover:border-primary-100 group-hover:shadow-2xl group-hover:shadow-primary-500/10 transition-all duration-500 overflow-hidden group-hover:-translate-y-1">
                     <div className="relative overflow-hidden">
                       <img
-                        src={doctor.profilePicture || `https://ui-avatars.com/api/?name=${doctor.name}&background=random`}
+                        src={doctor.image}
                         alt={doctor.name}
                         className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-green-600 shadow-lg flex items-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full mr-1.5 animate-pulse-soft"></span>
-                        Available
+                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5 ${doctor.isAvailable ? 'text-green-600' : 'text-gray-500'}">
+                        <span className={`w-2 h-2 rounded-full ${doctor.isAvailable ? 'bg-green-500 animate-pulse-soft' : 'bg-gray-400'}`}></span>
+                        {doctor.isAvailable ? 'Available' : 'Unavailable'}
                       </div>
                     </div>
                     <div className="p-6">
@@ -546,20 +531,20 @@ const Home = () => {
                       <div className="flex items-center mb-4">
                         <div className="flex text-yellow-400">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 ${i < Math.floor(doctor.rating || 0) ? 'fill-current' : ''}`} />
+                            <Star key={i} className={`w-4 h-4 ${i < Math.floor(doctor.rating) ? 'fill-current' : ''}`} />
                           ))}
                         </div>
-                        <span className="ml-2 text-sm text-gray-500">({doctor.rating || 4.5})</span>
+                        <span className="ml-2 text-sm text-gray-500">({doctor.rating})</span>
                       </div>
                       <div className="flex items-center text-sm text-gray-500 mb-4">
                         <MapPin className="w-4 h-4 mr-1.5" />
-                        {doctor.location || 'New York, USA'}
+                        {doctor.city}
                       </div>
                       <Link
-                        to={`/doctors/${doctor._id}`}
+                        to={`/doctors/${doctor.id}`}
                         className="w-full bg-gradient-to-r from-primary-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 text-center block group-hover:shadow-xl"
                       >
-                        Book Appointment
+                        View Profile
                       </Link>
                     </div>
                   </div>
@@ -632,38 +617,38 @@ const Home = () => {
             </div>
           ) : recentBlogs.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {recentBlogs.map((blog, idx) => (
-                <div
-                  key={blog._id}
-                  className="group cursor-pointer"
-                  onClick={() => window.location.href = `/blogs/${blog._id}`}
+              {recentBlogs.map((blog) => (
+                <Link
+                  key={blog.id}
+                  to={`/blogs/${blog.slug}`}
+                  className="group"
                 >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-1">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-1 h-full">
                     <div className="relative overflow-hidden">
                       <img
-                        src={blog.featuredImage || `https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`}
+                        src={blog.image}
                         alt={blog.title}
                         className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                       <div className="absolute top-4 left-4">
                         <span className="bg-white/90 backdrop-blur-sm text-primary-700 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
-                          {blog.category || 'Health'}
+                          {blog.category}
                         </span>
                       </div>
                     </div>
                     <div className="p-6">
                       <div className="flex items-center text-sm text-gray-500 mb-3">
                         <BookOpen className="w-4 h-4 mr-1.5" />
-                        {blog.readTime || '5 min read'}
+                        {blog.readTime} min read
                         <span className="mx-2">•</span>
-                        <span>{new Date(blog.createdAt || Date.now()).toLocaleDateString()}</span>
+                        <span>{new Date(blog.date).toLocaleDateString()}</span>
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
                         {blog.title}
                       </h3>
                       <p className="text-gray-600 line-clamp-3 leading-relaxed">
-                        {blog.excerpt || 'Read this informative article to learn more about health and wellness.'}
+                        {blog.summary}
                       </p>
                       <div className="mt-4 flex items-center text-primary-600 font-semibold group-hover:text-primary-700">
                         Read More
@@ -671,7 +656,7 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           ) : (
@@ -864,23 +849,23 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/register"
+              to="/doctors"
               className="bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-primary-500/30 transition-all duration-300 hover:-translate-y-0.5"
             >
-              Get Started Free
+              Browse Doctors
             </Link>
             <Link
-              to="/register"
+              to="/blogs"
               className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-gray-900 transition-all duration-300 hover:-translate-y-0.5"
             >
-              <Stethoscope className="w-5 h-5 inline mr-2" />
-              Register as Doctor
+              <BookOpen className="w-5 h-5 inline mr-2" />
+              Read Health Blogs
             </Link>
             <Link
               to="/doctors"
               className="bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:border-white hover:bg-white/5 transition-all duration-300"
             >
-              Browse Doctors
+              Find a Specialist
             </Link>
           </div>
         </div>
