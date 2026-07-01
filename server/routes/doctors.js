@@ -211,6 +211,72 @@ router.get('/stats', auth, async (req, res) => {
   }
 });
 
+// Get all doctors for admin (with approval status)
+router.get('/admin', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. Only admins can view all doctors.'
+      });
+    }
+
+    const { page = 1, limit = 10, search, status, specialization } = req.query;
+    const filter = {};
+
+    if (status === 'pending') {
+      filter.isApproved = false;
+      filter.rejectionReason = { $exists: false };
+    } else if (status === 'approved') {
+      filter.isApproved = true;
+    } else if (status === 'rejected') {
+      filter.rejectionReason = { $exists: true, $ne: null };
+    }
+
+    if (specialization) {
+      filter.specialization = specialization;
+    }
+
+    if (search) {
+      filter.$or = [
+        { specialization: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const doctors = await Doctor.find(filter)
+      .populate('userId', 'name email profilePicture')
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .sort({ createdAt: -1 });
+
+    const total = await Doctor.countDocuments(filter);
+
+    const doctorsWithStatus = doctors.map(doc => ({
+      ...doc.toObject(),
+      approvalStatus: doc.isApproved ? 'approved' : doc.rejectionReason ? 'rejected' : 'pending'
+    }));
+
+    res.json({
+      success: true,
+      data: {
+        doctors: doctorsWithStatus,
+        pagination: {
+          current: parseInt(page),
+          pages: Math.ceil(total / parseInt(limit)),
+          total
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Get admin doctors error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch doctors',
+      error: error.message
+    });
+  }
+});
+
 // Get single doctor by ID
 router.get('/:id', async (req, res) => {
   try {
@@ -410,6 +476,92 @@ router.put('/profile', auth, async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to update profile',
+      error: error.message
+    });
+  }
+});
+
+// Approve doctor (admin only)
+router.put('/:id/approve', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. Only admins can approve doctors.'
+      });
+    }
+
+    const doctor = await Doctor.findById(req.params.id);
+
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor not found'
+      });
+    }
+
+    doctor.isApproved = true;
+    doctor.approvalDate = new Date();
+    doctor.rejectionReason = undefined;
+    await doctor.save();
+
+    res.json({
+      success: true,
+      message: 'Doctor approved successfully',
+      data: { doctor }
+    });
+  } catch (error) {
+    console.error('Approve doctor error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to approve doctor',
+      error: error.message
+    });
+  }
+});
+
+// Reject doctor (admin only)
+router.put('/:id/reject', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. Only admins can reject doctors.'
+      });
+    }
+
+    const { reason } = req.body;
+
+    if (!reason) {
+      return res.status(400).json({
+        success: false,
+        message: 'Rejection reason is required'
+      });
+    }
+
+    const doctor = await Doctor.findById(req.params.id);
+
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor not found'
+      });
+    }
+
+    doctor.isApproved = false;
+    doctor.rejectionReason = reason;
+    await doctor.save();
+
+    res.json({
+      success: true,
+      message: 'Doctor rejected',
+      data: { doctor }
+    });
+  } catch (error) {
+    console.error('Reject doctor error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to reject doctor',
       error: error.message
     });
   }

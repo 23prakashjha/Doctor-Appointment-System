@@ -147,7 +147,7 @@ export const adminService = {
   updateUserStatus: (id, statusData) => authAPI.put(`/users/${id}/status`, statusData),
   getUserStats: () => authAPI.get('/users/stats/dashboard'),
   
-  getDoctors: (params) => authAPI.get('/doctors', { params }),
+  getDoctors: (params) => authAPI.get('/doctors/admin', { params }),
   approveDoctor: (id) => authAPI.put(`/doctors/${id}/approve`),
   rejectDoctor: (id, data) => authAPI.put(`/doctors/${id}/reject`, data),
   
