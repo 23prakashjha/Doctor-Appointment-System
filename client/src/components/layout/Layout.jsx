@@ -48,7 +48,7 @@ const Layout = () => {
         { label: 'Reviews', icon: Star, href: '/dashboard/user/reviews' },
         { label: 'Health Blogs', icon: FileText, href: '/blogs' },
       ]
-    } else     } else if (user.role === 'doctor') {
+    } else if (user.role === 'doctor') {
       return [
         { label: 'Dashboard', icon: Home, href: '/dashboard/admin' },
         { label: 'My Profile', icon: User, href: '/dashboard/admin/profile' },
