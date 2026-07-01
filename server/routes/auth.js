@@ -173,11 +173,23 @@ router.post('/login', async (req, res) => {
     const userObj = user.toObject();
     delete userObj.password;
 
+    // If doctor, fetch doctor profile
+    let doctorProfile = null;
+    if (user.role === 'doctor') {
+      try {
+        const Doctor = require('../models/Doctor');
+        doctorProfile = await Doctor.findOne({ userId: user._id });
+      } catch (e) {
+        // Doctor profile might not exist yet
+      }
+    }
+
     res.json({
       success: true,
       message: 'Login successful',
       data: {
         user: userObj,
+        doctor: doctorProfile,
         token
       }
     });
@@ -288,9 +300,19 @@ router.get('/me', async (req, res) => {
       });
     }
 
+    let doctorProfile = null;
+    if (user.role === 'doctor') {
+      try {
+        const Doctor = require('../models/Doctor');
+        doctorProfile = await Doctor.findOne({ userId: user._id });
+      } catch (e) {
+        // Doctor profile might not exist yet
+      }
+    }
+
     res.json({
       success: true,
-      data: { user }
+      data: { user, doctor: doctorProfile }
     });
   } catch (error) {
     console.error('Get current user error:', error);

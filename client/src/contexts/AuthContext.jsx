@@ -101,7 +101,10 @@ export const AuthProvider = ({ children }) => {
           }
         } catch (error) {
           console.error('Auth check failed:', error)
-          dispatch({ type: 'LOGOUT' })
+          const lastLoginTime = parseInt(localStorage.getItem('lastLoginTime') || '0')
+          if (Date.now() - lastLoginTime > 2000) {
+            dispatch({ type: 'LOGOUT' })
+          }
         } finally {
           dispatch({ type: 'SET_LOADING', payload: false })
         }
@@ -121,6 +124,8 @@ export const AuthProvider = ({ children }) => {
         
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('lastLoginTime', Date.now().toString())
+        authAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`
         
         dispatch({
           type: 'LOGIN_SUCCESS',
@@ -156,6 +161,11 @@ export const AuthProvider = ({ children }) => {
       
       if (response.data.success) {
         const { user, doctor, token } = response.data.data
+        
+        localStorage.setItem('token', token)
+        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('lastLoginTime', Date.now().toString())
+        authAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`
         
         dispatch({
           type: 'LOGIN_SUCCESS',
