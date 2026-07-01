@@ -154,13 +154,10 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       dispatch({ type: 'LOGIN_START' })
-      
-      // Use the same endpoint for both user and doctor registration
-      // The backend will handle the role-based logic
       const response = await authAPI.post('/auth/register', userData)
       
       if (response.data.success) {
-        const { user, doctor, token } = response.data.data
+        const { user, token } = response.data.data
         
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
@@ -169,14 +166,10 @@ export const AuthProvider = ({ children }) => {
         
         dispatch({
           type: 'LOGIN_SUCCESS',
-          payload: {
-            user,
-            doctor: userData.role === 'doctor' ? (doctor || user) : null,
-            token,
-          },
+          payload: { user, token },
         })
         
-        toast.success(response.data.message || `${userData.role === 'doctor' ? 'Doctor' : 'Patient'} registration successful!`)
+        toast.success('Registration successful!')
         return { success: true }
       } else {
         dispatch({ type: 'LOGIN_FAILURE' })
