@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../contexts/AuthContext'
@@ -7,8 +7,19 @@ import { Eye, EyeOff, Mail, Lock, Stethoscope, Sparkles } from 'lucide-react'
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { login } = useAuth()
+  const { login, isAuthenticated, user } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const path = user.role === 'doctor'
+        ? '/dashboard/doctor'
+        : user.role === 'admin'
+        ? '/dashboard/admin'
+        : '/dashboard/user'
+      navigate(path)
+    }
+  }, [isAuthenticated, user, navigate])
 
   const {
     register,
@@ -18,19 +29,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true)
-    const result = await login(data)
-
-    if (result.success) {
-      const user = result.user
-      if (user?.role === 'doctor') {
-        navigate('/dashboard/doctor')
-      } else if (user?.role === 'admin') {
-        navigate('/dashboard/admin')
-      } else {
-        navigate('/dashboard/user')
-      }
-    }
-
+    await login(data)
     setIsLoading(false)
   }
 
