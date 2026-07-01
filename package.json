@@ -4,11 +4,8 @@
   "description": "A comprehensive doctor appointment booking system using MERN stack",
   "main": "server/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon server/index.js",
-    "client": "cd client && npm run dev",
-    "build": "cd client && npm run build",
-    "start": "node server/index.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": ["doctor", "appointment", "mern", "healthcare"],
   "author": "Your Name",
