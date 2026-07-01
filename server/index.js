@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+// CORS is handled manually below (no cors package needed)
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
@@ -38,7 +38,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS
+// CORS - manual middleware to ensure headers on ALL responses (prevents CORB)
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
@@ -48,19 +48,24 @@ const allowedOrigins = [
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  res.setHeader('Vary', 'Origin');
+
+  if (origin && allowedOrigins.indexOf(origin) !== -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  }
+
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  next();
+});
 
 // Body parser middleware
 app.use(express.json({ limit: '10mb' }));

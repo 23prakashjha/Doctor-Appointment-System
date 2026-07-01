@@ -79,7 +79,7 @@ const Profile = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name *</label>
                       <div className="relative">
                         <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                        <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" className="input pl-11" placeholder="John Doe" />
+                        <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" autoComplete="name" className="input pl-11" placeholder="John Doe" />
                       </div>
                       {errors.name && <p className="mt-1 text-sm text-red-500 font-medium">{errors.name.message}</p>}
                     </div>
@@ -87,7 +87,7 @@ const Profile = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email *</label>
                       <div className="relative">
                         <Mail className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                        <input {...register('email')} type="email" className="input pl-11 bg-gray-50 text-gray-500" disabled />
+                        <input {...register('email')} type="email" autoComplete="email" className="input pl-11 bg-gray-50 text-gray-500" disabled />
                       </div>
                       <p className="text-xs text-gray-400 mt-1">Email cannot be changed</p>
                     </div>
@@ -95,7 +95,7 @@ const Profile = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone *</label>
                       <div className="relative">
                         <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                        <input {...register('phone', { required: 'Phone is required', pattern: { value: /^[0-9]{10}$/, message: 'Must be 10 digits' } })} type="tel" className="input pl-11" placeholder="1234567890" />
+                        <input {...register('phone', { required: 'Phone is required', pattern: { value: /^[0-9]{10}$/, message: 'Must be 10 digits' } })} type="tel" autoComplete="tel" className="input pl-11" placeholder="1234567890" />
                       </div>
                       {errors.phone && <p className="mt-1 text-sm text-red-500 font-medium">{errors.phone.message}</p>}
                     </div>
@@ -103,7 +103,7 @@ const Profile = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Age *</label>
                       <div className="relative">
                         <Calendar className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                        <input {...register('age', { required: 'Age is required', min: { value: 1, message: 'Min 1' }, max: { value: 120, message: 'Max 120' } })} type="number" className="input pl-11" placeholder="25" />
+                        <input {...register('age', { required: 'Age is required', min: { value: 1, message: 'Min 1' }, max: { value: 120, message: 'Max 120' } })} type="number" autoComplete="off" className="input pl-11" placeholder="25" />
                       </div>
                       {errors.age && <p className="mt-1 text-sm text-red-500 font-medium">{errors.age.message}</p>}
                     </div>
@@ -122,7 +122,7 @@ const Profile = () => {
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Address</label>
                     <div className="relative">
                       <MapPin className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                      <textarea {...register('address')} rows={3} className="input pl-11 resize-none" placeholder="Enter your complete address" />
+                      <textarea {...register('address')} rows={3} className="input pl-11 resize-none" placeholder="Enter your complete address" autoComplete="street-address" />
                     </div>
                   </div>
                 </div>

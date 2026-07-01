@@ -101,6 +101,7 @@ const Login = () => {
                       pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' },
                     })}
                     type="email"
+                    autoComplete="email"
                     className="input pl-11"
                     placeholder="you@example.com"
                   />
@@ -125,6 +126,7 @@ const Login = () => {
                       minLength: { value: 6, message: 'Password must be at least 6 characters' },
                     })}
                     type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
                     className="input pl-11 pr-11"
                     placeholder="Enter your password"
                   />
@@ -149,6 +151,7 @@ const Login = () => {
                 <label className="flex items-center">
                   <input
                     type="checkbox"
+                    autoComplete="off"
                     className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <span className="ml-2 text-sm text-gray-600">Remember me</span>

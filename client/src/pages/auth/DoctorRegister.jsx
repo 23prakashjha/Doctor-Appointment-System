@@ -68,7 +68,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name *</label>
                   <div className="relative">
                     <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" className="input pl-11" placeholder="Dr. John Smith" />
+                    <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" autoComplete="name" className="input pl-11" placeholder="Dr. John Smith" />
                   </div>
                   {errors.name && <p className="mt-1 text-sm text-red-500 font-medium">{errors.name.message}</p>}
                 </div>
@@ -76,7 +76,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email *</label>
                   <div className="relative">
                     <Mail className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })} type="email" className="input pl-11" placeholder="doctor@example.com" />
+                    <input {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })} type="email" autoComplete="email" className="input pl-11" placeholder="doctor@example.com" />
                   </div>
                   {errors.email && <p className="mt-1 text-sm text-red-500 font-medium">{errors.email.message}</p>}
                 </div>
@@ -84,7 +84,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone *</label>
                   <div className="relative">
                     <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('phone', { required: 'Phone is required', pattern: { value: /^[0-9]{10}$/, message: 'Must be 10 digits' } })} type="tel" className="input pl-11" placeholder="1234567890" />
+                    <input {...register('phone', { required: 'Phone is required', pattern: { value: /^[0-9]{10}$/, message: 'Must be 10 digits' } })} type="tel" autoComplete="tel" className="input pl-11" placeholder="1234567890" />
                   </div>
                   {errors.phone && <p className="mt-1 text-sm text-red-500 font-medium">{errors.phone.message}</p>}
                 </div>
@@ -92,7 +92,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Age *</label>
                   <div className="relative">
                     <Calendar className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('age', { required: 'Age is required', min: { value: 25, message: 'Min age is 25' }, max: { value: 70, message: 'Max age is 70' } })} type="number" className="input pl-11" placeholder="35" />
+                    <input {...register('age', { required: 'Age is required', min: { value: 25, message: 'Min age is 25' }, max: { value: 70, message: 'Max age is 70' } })} type="number" autoComplete="off" className="input pl-11" placeholder="35" />
                   </div>
                   {errors.age && <p className="mt-1 text-sm text-red-500 font-medium">{errors.age.message}</p>}
                 </div>
@@ -110,7 +110,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Experience (years) *</label>
                   <div className="relative">
                     <Briefcase className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('experience', { required: 'Experience is required', min: { value: 0, message: 'Cannot be negative' }, max: { value: 50, message: 'Max 50 years' } })} type="number" className="input pl-11" placeholder="10" />
+                    <input {...register('experience', { required: 'Experience is required', min: { value: 0, message: 'Cannot be negative' }, max: { value: 50, message: 'Max 50 years' } })} type="number" autoComplete="off" className="input pl-11" placeholder="10" />
                   </div>
                   {errors.experience && <p className="mt-1 text-sm text-red-500 font-medium">{errors.experience.message}</p>}
                 </div>
@@ -138,7 +138,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Qualification *</label>
                   <div className="relative">
                     <Award className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('qualification', { required: 'Qualification is required' })} type="text" className="input pl-11" placeholder="MBBS, MD, MS..." />
+                    <input {...register('qualification', { required: 'Qualification is required' })} type="text" autoComplete="off" className="input pl-11" placeholder="MBBS, MD, MS..." />
                   </div>
                   {errors.qualification && <p className="mt-1 text-sm text-red-500 font-medium">{errors.qualification.message}</p>}
                 </div>
@@ -146,7 +146,7 @@ const DoctorRegister = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Consultation Fee (₹) *</label>
                   <div className="relative">
                     <FileText className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('consultationFee', { required: 'Fee is required', min: { value: 0, message: 'Cannot be negative' } })} type="number" className="input pl-11" placeholder="500" />
+                    <input {...register('consultationFee', { required: 'Fee is required', min: { value: 0, message: 'Cannot be negative' } })} type="number" autoComplete="off" className="input pl-11" placeholder="500" />
                   </div>
                   {errors.consultationFee && <p className="mt-1 text-sm text-red-500 font-medium">{errors.consultationFee.message}</p>}
                 </div>
@@ -179,24 +179,24 @@ const DoctorRegister = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Clinic Name *</label>
-                  <input {...register('clinicName', { required: 'Clinic name is required' })} type="text" className="input" placeholder="City Medical Center" />
+                    <input {...register('clinicName', { required: 'Clinic name is required' })} type="text" autoComplete="organization" className="input" placeholder="City Medical Center" />
                   {errors.clinicName && <p className="mt-1 text-sm text-red-500 font-medium">{errors.clinicName.message}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Clinic Address *</label>
-                  <input {...register('clinicAddress', { required: 'Address is required' })} type="text" className="input" placeholder="123 Medical Street, City, State" />
+                    <input {...register('clinicAddress', { required: 'Address is required' })} type="text" autoComplete="street-address" className="input" placeholder="123 Medical Street, City, State" />
                   {errors.clinicAddress && <p className="mt-1 text-sm text-red-500 font-medium">{errors.clinicAddress.message}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">City *</label>
-                  <input {...register('city', { required: 'City is required' })} type="text" className="input" placeholder="New York" />
+                    <input {...register('city', { required: 'City is required' })} type="text" autoComplete="address-level2" className="input" placeholder="New York" />
                   {errors.city && <p className="mt-1 text-sm text-red-500 font-medium">{errors.city.message}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Working Hours</label>
                   <div className="relative">
                     <Clock className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                    <input {...register('workingHours')} type="text" className="input pl-11" placeholder="Mon-Fri: 9AM-6PM" />
+                    <input {...register('workingHours')} type="text" autoComplete="off" className="input pl-11" placeholder="Mon-Fri: 9AM-6PM" />
                   </div>
                 </div>
               </div>
@@ -219,7 +219,7 @@ const DoctorRegister = () => {
                       required: 'Password is required',
                       minLength: { value: 8, message: 'Min 8 characters' },
                       pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, message: 'Need uppercase, lowercase & number' }
-                    })} type={showPassword ? 'text' : 'password'} className="input pl-11 pr-11" placeholder="••••••••" />
+                    })} type={showPassword ? 'text' : 'password'} autoComplete="new-password" className="input pl-11 pr-11" placeholder="••••••••" />
                     <button type="button" className="absolute right-3.5 top-3.5" onClick={() => setShowPassword(!showPassword)}>
                       {showPassword ? <EyeOff className="w-5 h-5 text-gray-400" /> : <Eye className="w-5 h-5 text-gray-400" />}
                     </button>
@@ -233,7 +233,7 @@ const DoctorRegister = () => {
                     <input {...register('confirmPassword', {
                       required: 'Please confirm your password',
                       validate: (value) => value === password || 'Passwords do not match'
-                    })} type={showConfirmPassword ? 'text' : 'password'} className="input pl-11 pr-11" placeholder="••••••••" />
+                    })} type={showConfirmPassword ? 'text' : 'password'} autoComplete="new-password" className="input pl-11 pr-11" placeholder="••••••••" />
                     <button type="button" className="absolute right-3.5 top-3.5" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                       {showConfirmPassword ? <EyeOff className="w-5 h-5 text-gray-400" /> : <Eye className="w-5 h-5 text-gray-400" />}
                     </button>

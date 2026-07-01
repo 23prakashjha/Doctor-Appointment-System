@@ -146,6 +146,7 @@ const Register = () => {
                   <input
                     {...register('name', { required: 'Full name is required', minLength: { value: 2, message: 'Name must be at least 2 characters' } })}
                     type="text"
+                    autoComplete="name"
                     className="input pl-11"
                     placeholder="John Doe"
                   />
@@ -162,6 +163,7 @@ const Register = () => {
                   <input
                     {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' } })}
                     type="email"
+                    autoComplete="email"
                     className="input pl-11"
                     placeholder="john@example.com"
                   />
@@ -178,6 +180,7 @@ const Register = () => {
                   <input
                     {...register('phone', { required: 'Phone number is required', pattern: { value: /^[0-9]{10}$/, message: 'Phone number must be 10 digits' } })}
                     type="tel"
+                    autoComplete="tel"
                     className="input pl-11"
                     placeholder="9876543210"
                   />
@@ -195,6 +198,7 @@ const Register = () => {
                     <input
                       {...register('age', { required: 'Age is required', min: { value: 1, message: 'Min 1' }, max: { value: 120, message: 'Max 120' } })}
                       type="number"
+                      autoComplete="off"
                       className="input pl-11"
                       placeholder="25"
                     />
@@ -223,6 +227,7 @@ const Register = () => {
                   <input
                     {...register('password', { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } })}
                     type={showPassword ? 'text' : 'password'}
+                    autoComplete="new-password"
                     className="input pl-11 pr-11"
                     placeholder="Create a password"
                   />
@@ -246,6 +251,7 @@ const Register = () => {
                   <input
                     {...register('confirmPassword', { required: 'Please confirm your password', validate: (value) => value === password || 'Passwords do not match' })}
                     type="password"
+                    autoComplete="new-password"
                     className="input pl-11"
                     placeholder="Confirm your password"
                   />

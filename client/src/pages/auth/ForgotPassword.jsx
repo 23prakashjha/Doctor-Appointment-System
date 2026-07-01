@@ -72,7 +72,7 @@ const ForgotPassword = () => {
                 <input {...register('email', {
                   required: 'Email is required',
                   pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' }
-                })} type="email" className="input pl-11" placeholder="Enter your email" />
+                })} type="email" autoComplete="email" className="input pl-11" placeholder="Enter your email" />
               </div>
               {errors.email && <p className="mt-1 text-sm text-red-500 font-medium">{errors.email.message}</p>}
             </div>

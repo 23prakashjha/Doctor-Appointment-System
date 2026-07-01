@@ -124,7 +124,7 @@ const Contact = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Your Name *</label>
                       <div className="relative">
                         <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                        <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" className="input pl-11" placeholder="John Doe" />
+                        <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" autoComplete="name" className="input pl-11" placeholder="John Doe" />
                       </div>
                       {errors.name && <p className="mt-1 text-sm text-error-600">{errors.name.message}</p>}
                     </div>
@@ -133,7 +133,7 @@ const Contact = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address *</label>
                       <div className="relative">
                         <Mail className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                        <input {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })} type="email" className="input pl-11" placeholder="john@example.com" />
+                        <input {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })} type="email" autoComplete="email" className="input pl-11" placeholder="john@example.com" />
                       </div>
                       {errors.email && <p className="mt-1 text-sm text-error-600">{errors.email.message}</p>}
                     </div>
@@ -143,7 +143,7 @@ const Contact = () => {
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
-                      <input {...register('phone', { pattern: { value: /^[0-9]{10}$/, message: 'Valid 10-digit number' } })} type="tel" className="input pl-11" placeholder="(555) 123-4567" />
+                      <input {...register('phone', { pattern: { value: /^[0-9]{10}$/, message: 'Valid 10-digit number' } })} type="tel" autoComplete="tel" className="input pl-11" placeholder="(555) 123-4567" />
                     </div>
                     {errors.phone && <p className="mt-1 text-sm text-error-600">{errors.phone.message}</p>}
                   </div>

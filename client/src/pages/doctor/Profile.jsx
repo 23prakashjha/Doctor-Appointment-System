@@ -122,22 +122,22 @@ const DoctorProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Specialization *</label>
-                <input {...register('specialization', { required: 'Required' })} type="text" className="input" placeholder="e.g., Cardiologist" />
+                <input {...register('specialization', { required: 'Required' })} type="text" autoComplete="off" className="input" placeholder="e.g., Cardiologist" />
                 {errors.specialization && <p className="mt-1 text-sm text-red-500">{errors.specialization.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Qualification *</label>
-                <input {...register('qualification', { required: 'Required' })} type="text" className="input" placeholder="e.g., MBBS, MD" />
+                <input {...register('qualification', { required: 'Required' })} type="text" autoComplete="off" className="input" placeholder="e.g., MBBS, MD" />
                 {errors.qualification && <p className="mt-1 text-sm text-red-500">{errors.qualification.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Experience (years) *</label>
-                <input {...register('experience', { required: 'Required', min: { value: 0, message: 'Must be positive' } })} type="number" className="input" placeholder="e.g., 5" />
+                <input {...register('experience', { required: 'Required', min: { value: 0, message: 'Must be positive' } })} type="number" autoComplete="off" className="input" placeholder="e.g., 5" />
                 {errors.experience && <p className="mt-1 text-sm text-red-500">{errors.experience.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Consultation Fee (₹) *</label>
-                <input {...register('consultationFee', { required: 'Required', min: { value: 0, message: 'Must be positive' } })} type="number" className="input" placeholder="500" />
+                <input {...register('consultationFee', { required: 'Required', min: { value: 0, message: 'Must be positive' } })} type="number" autoComplete="off" className="input" placeholder="500" />
                 {errors.consultationFee && <p className="mt-1 text-sm text-red-500">{errors.consultationFee.message}</p>}
               </div>
             </div>
@@ -149,21 +149,21 @@ const DoctorProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Street Address</label>
-                <input {...register('clinicAddress.street')} type="text" className="input" placeholder="123 Healthcare Avenue" />
+                <input {...register('clinicAddress.street')} type="text" autoComplete="street-address" className="input" placeholder="123 Healthcare Avenue" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">City *</label>
-                <input {...register('clinicAddress.city', { required: 'City is required' })} type="text" className="input" placeholder="Mumbai" />
+                <input {...register('clinicAddress.city', { required: 'City is required' })} type="text" autoComplete="address-level2" className="input" placeholder="Mumbai" />
                 {errors.clinicAddress?.city && <p className="mt-1 text-sm text-red-500">{errors.clinicAddress.city.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">State *</label>
-                <input {...register('clinicAddress.state', { required: 'State is required' })} type="text" className="input" placeholder="Maharashtra" />
+                <input {...register('clinicAddress.state', { required: 'State is required' })} type="text" autoComplete="address-level1" className="input" placeholder="Maharashtra" />
                 {errors.clinicAddress?.state && <p className="mt-1 text-sm text-red-500">{errors.clinicAddress.state.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">PIN Code *</label>
-                <input {...register('clinicAddress.pincode', { required: 'PIN is required' })} type="text" className="input" placeholder="400001" />
+                <input {...register('clinicAddress.pincode', { required: 'PIN is required' })} type="text" autoComplete="postal-code" className="input" placeholder="400001" />
                 {errors.clinicAddress?.pincode && <p className="mt-1 text-sm text-red-500">{errors.clinicAddress.pincode.message}</p>}
               </div>
             </div>
@@ -175,15 +175,15 @@ const DoctorProfile = () => {
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Bio</label>
-                <textarea {...register('bio')} rows={4} className="input resize-none" placeholder="Tell patients about your expertise..." />
+                <textarea {...register('bio')} rows={4} className="input resize-none" placeholder="Tell patients about your expertise..." autoComplete="off" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Languages (comma-separated)</label>
-                <input {...register('languages')} type="text" className="input" placeholder="English, Hindi, Marathi" />
+                <input {...register('languages')} type="text" autoComplete="off" className="input" placeholder="English, Hindi, Marathi" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Achievements (comma-separated)</label>
-                <textarea {...register('achievements')} rows={3} className="input resize-none" placeholder="Best Doctor Award 2020, Research Publication..." />
+                <textarea {...register('achievements')} rows={3} className="input resize-none" placeholder="Best Doctor Award 2020, Research Publication..." autoComplete="off" />
               </div>
             </div>
           </div>
