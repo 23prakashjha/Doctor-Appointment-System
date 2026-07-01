@@ -19,7 +19,7 @@ const DoctorProfile = () => {
 
   const fetchDoctorProfile = async () => {
     try {
-      const response = await doctorService.getDoctorById(user?._id)
+      const response = await doctorService.getDoctorProfile()
       const doctor = response.data.data.doctor
       setDoctorData(doctor)
       reset({

@@ -61,6 +61,7 @@ export const authService = {
 export const doctorService = {
   getAllDoctors: (params) => authAPI.get('/doctors', { params }),
   getDoctorById: (id) => authAPI.get(`/doctors/${id}`),
+  getDoctorProfile: () => authAPI.get('/doctors/profile/me'),
   registerDoctor: (doctorData) => authAPI.post('/doctors/register', doctorData),
   updateDoctorProfile: (doctorData) => authAPI.put('/doctors/profile', doctorData),
   getDoctorAppointments: (params) => authAPI.get('/doctors/my-appointments', { params }),
@@ -83,7 +84,7 @@ export const paymentService = {
   verifyPayment: (paymentData) => authAPI.post('/payments/verify', paymentData),
   getPaymentHistory: (params) => authAPI.get('/payments/history', { params }),
   getPaymentById: (id) => authAPI.get(`/payments/${id}`),
-  getPaymentStats: () => authAPI.get('/payments/stats'),
+  getPaymentStats: (params) => authAPI.get('/payments/stats', { params }),
 }
 
 export const reviewService = {
@@ -152,6 +153,7 @@ export const adminService = {
   
   getAppointments: (params) => authAPI.get('/appointments', { params }),
   getPayments: (params) => authAPI.get('/payments', { params }),
+  getPaymentStats: () => authAPI.get('/payments/admin/stats'),
   
   createDisease: (diseaseData) => authAPI.post('/diseases', diseaseData),
   updateDisease: (id, diseaseData) => authAPI.put(`/diseases/${id}`, diseaseData),

@@ -238,6 +238,70 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Update appointment status (for authenticated doctors)
+router.put('/appointments/:id/status', auth, async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.user.userId });
+
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor profile not found'
+      });
+    }
+
+    const Appointment = require('../models/Appointment');
+    const appointment = await Appointment.findById(req.params.id);
+
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: 'Appointment not found'
+      });
+    }
+
+    if (appointment.doctorId.toString() !== doctor._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. This appointment does not belong to you.'
+      });
+    }
+
+    const { status } = req.body;
+    const validStatuses = ['confirmed', 'completed', 'cancelled', 'no-show'];
+
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid status. Must be one of: ${validStatuses.join(', ')}`
+      });
+    }
+
+    if (appointment.status === 'completed' || appointment.status === 'cancelled') {
+      return res.status(400).json({
+        success: false,
+        message: `Cannot update status of a ${appointment.status} appointment`
+      });
+    }
+
+    appointment.status = status;
+    await appointment.save();
+
+    res.json({
+      success: true,
+      message: `Appointment ${status} successfully`,
+      data: { appointment }
+    });
+  } catch (error) {
+    console.error('Update appointment status error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update appointment status',
+      error: error.message
+    });
+  }
+});
+
 // Register as doctor (for authenticated users)
 router.post('/register', auth, async (req, res) => {
   try {

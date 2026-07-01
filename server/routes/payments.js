@@ -298,6 +298,111 @@ router.get('/stats', auth, async (req, res) => {
   }
 });
 
+// Get all payments (for admin)
+router.get('/', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. Only admins can view all payments.'
+      });
+    }
+
+    const { page = 1, limit = 10, status, search, date, method } = req.query;
+    const filter = {};
+
+    if (status) filter.status = status;
+    if (date) filter.paymentDate = { $gte: new Date(date) };
+    if (method) filter.paymentMethod = method;
+    if (search) {
+      filter.$or = [
+        { transactionId: { $regex: search, $options: 'i' } },
+        { razorpayOrderId: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    const payments = await Payment.find(filter)
+      .populate('patientId', 'name email')
+      .populate('doctorId')
+      .populate('doctorId.userId', 'name')
+      .sort({ paymentDate: -1 })
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    const total = await Payment.countDocuments(filter);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        payments,
+        pagination: {
+          current: parseInt(page),
+          pages: Math.ceil(total / parseInt(limit)),
+          total
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Get all payments error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch payments',
+      error: error.message
+    });
+  }
+});
+
+// Get payment statistics (for admin)
+router.get('/admin/stats', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. Only admins can view payment statistics.'
+      });
+    }
+
+    const totalRevenue = await Payment.aggregate([
+      { $match: { status: 'completed' } },
+      { $group: { _id: null, total: { $sum: '$amount' }, count: { $sum: 1 } } }
+    ]);
+
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const thisMonthRevenue = await Payment.aggregate([
+      { $match: { status: 'completed', paymentDate: { $gte: startOfMonth } } },
+      { $group: { _id: null, total: { $sum: '$amount' } } }
+    ]);
+
+    const successfulTransactions = await Payment.countDocuments({ status: 'completed' });
+    const failedTransactions = await Payment.countDocuments({ status: 'failed' });
+    const refundedTransactions = await Payment.countDocuments({ status: { $in: ['refunded', 'partially_refunded'] } });
+    const pendingTransactions = await Payment.countDocuments({ status: 'pending' });
+
+    res.status(200).json({
+      success: true,
+      data: {
+        totalRevenue: totalRevenue[0]?.total || 0,
+        thisMonthRevenue: thisMonthRevenue[0]?.total || 0,
+        totalTransactions: totalRevenue[0]?.count || 0,
+        successfulTransactions,
+        failedTransactions,
+        refundedTransactions,
+        pendingTransactions
+      }
+    });
+  } catch (error) {
+    console.error('Get admin payment stats error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch payment statistics',
+      error: error.message
+    });
+  }
+});
+
 // Get payment by ID
 router.get('/:id', auth, async (req, res) => {
   try {
