@@ -52,7 +52,7 @@ const Navbar = () => {
   const getDashboardLink = () => {
     if (!user) return '/login'
     switch (user.role) {
-      case 'doctor': return '/dashboard/doctor'
+      case 'doctor': return '/dashboard/admin'
       case 'admin': return '/dashboard/admin'
       default: return '/dashboard/user'
     }
@@ -62,7 +62,7 @@ const Navbar = () => {
     if (!user) return []
     const baseItems = [
       { label: 'Dashboard', icon: <Calendar className="w-4 h-4" />, href: getDashboardLink() },
-      { label: 'Profile', icon: <User className="w-4 h-4" />, href: user.role === 'doctor' ? '/dashboard/doctor/profile' : '/dashboard/user/profile' },
+      { label: 'Profile', icon: <User className="w-4 h-4" />, href: user.role === 'doctor' ? '/dashboard/admin/profile' : '/dashboard/user/profile' },
     ]
     if (user.role === 'user') {
       baseItems.push(
@@ -72,9 +72,9 @@ const Navbar = () => {
       )
     } else if (user.role === 'doctor') {
       baseItems.push(
-        { label: 'My Appointments', icon: <Calendar className="w-4 h-4" />, href: '/dashboard/doctor/appointments' },
-        { label: 'Patients', icon: <User className="w-4 h-4" />, href: '/dashboard/doctor/patients' },
-        { label: 'Earnings', icon: <CreditCard className="w-4 h-4" />, href: '/dashboard/doctor/earnings' }
+        { label: 'My Appointments', icon: <Calendar className="w-4 h-4" />, href: '/dashboard/admin/appointments' },
+        { label: 'Patients', icon: <User className="w-4 h-4" />, href: '/dashboard/admin/patients' },
+        { label: 'Earnings', icon: <CreditCard className="w-4 h-4" />, href: '/dashboard/admin/earnings' }
       )
     }
     baseItems.push(

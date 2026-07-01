@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../contexts/AuthContext'
@@ -8,8 +8,17 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [userRole, setUserRole] = useState('user')
-  const { register: registerUser } = useAuth()
+  const { register: registerUser, isAuthenticated, user } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const path = user.role === 'doctor' || user.role === 'admin'
+        ? '/dashboard/admin'
+        : '/dashboard/user'
+      navigate(path)
+    }
+  }, [isAuthenticated, user, navigate])
 
   const {
     register,
@@ -23,16 +32,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     setIsLoading(true)
     const formData = { ...data, role: userRole }
-    const result = await registerUser(formData)
-
-    if (result.success) {
-      if (userRole === 'doctor') {
-        navigate('/dashboard/doctor')
-      } else {
-        navigate('/dashboard/user')
-      }
-    }
-
+    await registerUser(formData)
     setIsLoading(false)
   }
 

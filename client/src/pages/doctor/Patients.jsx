@@ -155,7 +155,7 @@ const Patients = () => {
                       <div className="flex items-center mt-0.5"><FileText className="w-3.5 h-3.5 mr-1" />{patient.totalAppointments || 0} visits</div>
                     </div>
                     <div className="flex gap-2">
-                      <Link to={`/dashboard/doctor/chat/${patient._id}`} className="btn-primary btn-sm"><MessageSquare className="w-3.5 h-3.5 mr-1" />Chat</Link>
+                      <Link to={`/dashboard/admin/chat/${patient._id}`} className="btn-primary btn-sm"><MessageSquare className="w-3.5 h-3.5 mr-1" />Chat</Link>
                       <button className="btn-outline btn-sm">Details</button>
                     </div>
                   </div>

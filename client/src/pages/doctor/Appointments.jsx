@@ -174,7 +174,7 @@ const DoctorAppointments = () => {
                     {apt.status === 'completed' && apt.prescription && (
                       <span className="inline-flex items-center px-3 py-1.5 bg-green-50 text-green-700 rounded-xl text-xs font-semibold"><FileText className="w-3.5 h-3.5 mr-1" />Prescribed</span>
                     )}
-                    <Link to={`/dashboard/doctor/chat/${apt.patientId?._id}`} className="btn-outline btn-sm"><MessageSquare className="w-3.5 h-3.5 mr-1" />Chat</Link>
+                    <Link to={`/dashboard/admin/chat/${apt.patientId?._id}`} className="btn-outline btn-sm"><MessageSquare className="w-3.5 h-3.5 mr-1" />Chat</Link>
                   </div>
                 </div>
               </div>

@@ -44,8 +44,9 @@ import AdminPayments from './pages/admin/Payments'
 import AdminBlogs from './pages/admin/Blogs'
 import AdminDiseases from './pages/admin/Diseases'
 
-// Protected Route Component
+// Protected Route Components
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import StaffRoute from './components/auth/StaffRoute'
 import AdminRoute from './components/auth/AdminRoute'
 
 // Error Pages
@@ -91,18 +92,11 @@ function App() {
           <Route path="user/payments" element={<UserPayments />} />
           <Route path="user/reviews" element={<UserReviews />} />
 
-          {/* Doctor Routes */}
-          <Route path="doctor" element={<DoctorDashboard />} />
-          <Route path="doctor/profile" element={<DoctorProfile />} />
-          <Route path="doctor/appointments" element={<DoctorAppointments />} />
-          <Route path="doctor/patients" element={<DoctorPatients />} />
-          <Route path="doctor/earnings" element={<DoctorEarnings />} />
-
-          {/* Admin Routes */}
+          {/* Staff Routes (merged doctor + admin) */}
           <Route path="admin" element={
-            <AdminRoute>
+            <StaffRoute>
               <AdminDashboard />
-            </AdminRoute>
+            </StaffRoute>
           } />
           <Route path="admin/users" element={
             <AdminRoute>
@@ -115,9 +109,9 @@ function App() {
             </AdminRoute>
           } />
           <Route path="admin/appointments" element={
-            <AdminRoute>
+            <StaffRoute>
               <AdminAppointments />
-            </AdminRoute>
+            </StaffRoute>
           } />
           <Route path="admin/payments" element={
             <AdminRoute>
@@ -134,6 +128,22 @@ function App() {
               <AdminDiseases />
             </AdminRoute>
           } />
+          {/* Doctor-specific routes under admin */}
+          <Route path="admin/profile" element={
+            <StaffRoute>
+              <DoctorProfile />
+            </StaffRoute>
+          } />
+          <Route path="admin/patients" element={
+            <StaffRoute>
+              <DoctorPatients />
+            </StaffRoute>
+          } />
+          <Route path="admin/earnings" element={
+            <StaffRoute>
+              <DoctorEarnings />
+            </StaffRoute>
+          } />
         </Route>
 
         {/* Error Routes */}
@@ -142,7 +152,7 @@ function App() {
 
         {/* Redirect old routes */}
         <Route path="/user/*" element={<Navigate to="/dashboard/user" replace />} />
-        <Route path="/doctor/*" element={<Navigate to="/dashboard/doctor" replace />} />
+        <Route path="/doctor/*" element={<Navigate to="/dashboard/admin" replace />} />
         <Route path="/admin/*" element={<Navigate to="/dashboard/admin" replace />} />
       </Routes>
     </>

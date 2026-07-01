@@ -48,14 +48,13 @@ const Layout = () => {
         { label: 'Reviews', icon: Star, href: '/dashboard/user/reviews' },
         { label: 'Health Blogs', icon: FileText, href: '/blogs' },
       ]
-    } else if (user.role === 'doctor') {
+    } else     } else if (user.role === 'doctor') {
       return [
-        { label: 'Dashboard', icon: Home, href: '/dashboard/doctor' },
-        { label: 'My Profile', icon: User, href: '/dashboard/doctor/profile' },
-        { label: 'Appointments', icon: Calendar, href: '/dashboard/doctor/appointments' },
-        { label: 'Patients', icon: Users, href: '/dashboard/doctor/patients' },
-        { label: 'Earnings', icon: TrendingUp, href: '/dashboard/doctor/earnings' },
-        { label: 'Reviews', icon: Star, href: '/dashboard/user/reviews' },
+        { label: 'Dashboard', icon: Home, href: '/dashboard/admin' },
+        { label: 'My Profile', icon: User, href: '/dashboard/admin/profile' },
+        { label: 'Appointments', icon: Calendar, href: '/dashboard/admin/appointments' },
+        { label: 'Patients', icon: Users, href: '/dashboard/admin/patients' },
+        { label: 'Earnings', icon: TrendingUp, href: '/dashboard/admin/earnings' },
       ]
     } else if (user.role === 'admin') {
       return [
@@ -76,7 +75,6 @@ const Layout = () => {
 
   const isActive = (href) => {
     if (href === '/dashboard/user' && location.pathname === '/dashboard/user') return true
-    if (href === '/dashboard/doctor' && location.pathname === '/dashboard/doctor') return true
     if (href === '/dashboard/admin' && location.pathname === '/dashboard/admin') return true
     return location.pathname.startsWith(href)
   }

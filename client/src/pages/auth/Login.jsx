@@ -12,9 +12,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      const path = user.role === 'doctor'
-        ? '/dashboard/doctor'
-        : user.role === 'admin'
+      const path = user.role === 'doctor' || user.role === 'admin'
         ? '/dashboard/admin'
         : '/dashboard/user'
       navigate(path)

@@ -81,10 +81,10 @@ const DoctorDashboard = () => {
   ]
 
   const quickActions = [
-    { label: 'Manage Appointments', desc: 'View and manage all appointments', icon: Calendar, href: '/dashboard/doctor/appointments', gradient: 'from-blue-500 to-cyan-500' },
-    { label: 'View Patients', desc: 'Manage patient records', icon: Users, href: '/dashboard/doctor/patients', gradient: 'from-green-500 to-emerald-500' },
-    { label: 'Update Profile', desc: 'Edit your professional details', icon: TrendingUp, href: '/dashboard/doctor/profile', gradient: 'from-purple-500 to-pink-500' },
-    { label: 'View Earnings', desc: 'Track your income', icon: CreditCard, href: '/dashboard/doctor/earnings', gradient: 'from-amber-500 to-orange-500' },
+    { label: 'Manage Appointments', desc: 'View and manage all appointments', icon: Calendar, href: '/dashboard/admin/appointments', gradient: 'from-blue-500 to-cyan-500' },
+    { label: 'View Patients', desc: 'Manage patient records', icon: Users, href: '/dashboard/admin/patients', gradient: 'from-green-500 to-emerald-500' },
+    { label: 'Update Profile', desc: 'Edit your professional details', icon: TrendingUp, href: '/dashboard/admin/profile', gradient: 'from-purple-500 to-pink-500' },
+    { label: 'View Earnings', desc: 'Track your income', icon: CreditCard, href: '/dashboard/admin/earnings', gradient: 'from-amber-500 to-orange-500' },
   ]
 
   if (loading) {

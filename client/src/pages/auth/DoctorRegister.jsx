@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../contexts/AuthContext'
@@ -11,10 +11,16 @@ const DoctorRegister = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { register: registerUser } = useAuth()
+  const { register: registerUser, isAuthenticated } = useAuth()
   const navigate = useNavigate()
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const password = watch('password')
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard/admin')
+    }
+  }, [isAuthenticated, navigate])
 
   const specialties = [
     'General Practice', 'Cardiology', 'Dermatology', 'Pediatrics', 'Orthopedics',
@@ -32,8 +38,7 @@ const DoctorRegister = () => {
   const onSubmit = async (data) => {
     setIsLoading(true)
     const doctorData = { ...data, role: 'doctor', consultationFee: parseInt(data.consultationFee), experience: parseInt(data.experience), age: parseInt(data.age) }
-    const result = await registerUser(doctorData)
-    if (result.success) navigate('/dashboard/doctor')
+    await registerUser(doctorData)
     setIsLoading(false)
   }
 
