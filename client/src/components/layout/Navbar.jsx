@@ -17,7 +17,9 @@ import {
   ChevronDown,
   Heart,
   Shield,
-  Clock
+  Clock,
+  LogIn,
+  UserPlus
 } from 'lucide-react'
 
 const Navbar = () => {
@@ -179,21 +181,59 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <>
-                <Link to="/login" className="btn-ghost text-sm font-medium">
-                  Login
-                </Link>
-                <Link
-                  to="/doctor-register"
-                  className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-xl border-2 border-primary-200 text-primary-700 hover:bg-primary-50 hover:border-primary-300 transition-all duration-200"
+              <div className="relative">
+                <button
+                  onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                  className="btn-primary btn-sm shadow-lg shadow-primary-500/20 inline-flex items-center"
                 >
-                  <Stethoscope className="w-4 h-4 mr-1.5" />
-                  For Doctors
-                </Link>
-                <Link to="/register" className="btn-primary btn-sm shadow-lg shadow-primary-500/20">
+                  <UserPlus className="w-4 h-4 mr-1.5" />
                   Sign Up
-                </Link>
-              </>
+                  <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-200 ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {isProfileMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 animate-fade-in-down">
+                    <div className="px-4 pb-2 border-b border-gray-100">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Patients</p>
+                    </div>
+                    <Link
+                      to="/login"
+                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <LogIn className="w-4 h-4 text-primary-500" />
+                      <span>Login</span>
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <UserPlus className="w-4 h-4 text-green-500" />
+                      <span>Register</span>
+                    </Link>
+                    <div className="mt-2 px-4 pt-2 border-t border-gray-100">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Doctors</p>
+                    </div>
+                    <Link
+                      to="/login"
+                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <LogIn className="w-4 h-4 text-primary-500" />
+                      <span>Login</span>
+                    </Link>
+                    <Link
+                      to="/doctor-register"
+                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <Stethoscope className="w-4 h-4 text-purple-500" />
+                      <span>Register</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
             )}
           </div>
 
@@ -254,24 +294,39 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
+                  <div className="px-4 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Patients</p>
+                  </div>
                   <Link
                     to="/login"
-                    className="block w-full text-center px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    Login
-                  </Link>
-                  <Link
-                    to="/doctor-register"
-                    className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold border-2 border-primary-200 text-primary-700 hover:bg-primary-50 transition-all duration-200"
-                  >
-                    <Stethoscope className="w-4 h-4 inline mr-1.5" />
-                    Register as Doctor
+                    <LogIn className="w-4 h-4 text-primary-500" />
+                    <span>Login</span>
                   </Link>
                   <Link
                     to="/register"
-                    className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary-600 to-purple-600 text-white hover:shadow-lg transition-all duration-200"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    Sign Up
+                    <UserPlus className="w-4 h-4 text-green-500" />
+                    <span>Register</span>
+                  </Link>
+                  <div className="px-4 pt-2 pb-1 mt-1 border-t border-gray-100">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Doctors</p>
+                  </div>
+                  <Link
+                    to="/login"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                  >
+                    <LogIn className="w-4 h-4 text-primary-500" />
+                    <span>Login</span>
+                  </Link>
+                  <Link
+                    to="/doctor-register"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                  >
+                    <Stethoscope className="w-4 h-4 text-purple-500" />
+                    <span>Register</span>
                   </Link>
                 </>
               )}
