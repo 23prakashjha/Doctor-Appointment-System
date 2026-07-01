@@ -7,9 +7,7 @@ import Layout from './components/layout/Layout'
 import PublicLayout from './components/layout/PublicLayout'
 
 // Auth Components
-import Login from './pages/auth/Login'
-import Register from './pages/auth/Register'
-import DoctorRegister from './pages/auth/DoctorRegister'
+import Auth from './pages/auth/Auth'
 import ForgotPassword from './pages/auth/ForgotPassword'
 
 // Public Pages
@@ -74,9 +72,8 @@ function App() {
         </Route>
 
         {/* Auth Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/doctor-register" element={<DoctorRegister />} />
+        <Route path="/login" element={<Auth />} />
+        <Route path="/register" element={<Auth />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Protected Routes */}

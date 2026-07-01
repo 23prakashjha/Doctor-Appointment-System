@@ -870,7 +870,7 @@ const Home = () => {
               Get Started Free
             </Link>
             <Link
-              to="/doctor-register"
+              to="/register"
               className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-gray-900 transition-all duration-300 hover:-translate-y-0.5"
             >
               <Stethoscope className="w-5 h-5 inline mr-2" />

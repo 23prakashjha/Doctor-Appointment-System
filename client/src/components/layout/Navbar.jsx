@@ -86,7 +86,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: 'Home', href: '/' },
-    { label: 'Find Doctors', href: '/doctors' },
+    { label: 'Doctors', href: '/doctors' },
     { label: 'Health Blogs', href: '/blogs' },
     { label: 'About Us', href: '/about' },
     { label: 'Contact', href: '/contact' },
@@ -192,10 +192,7 @@ const Navbar = () => {
                 </button>
 
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 animate-fade-in-down">
-                    <div className="px-4 pb-2 border-b border-gray-100">
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Patients</p>
-                    </div>
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 animate-fade-in-down">
                     <Link
                       to="/login"
                       className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
@@ -210,25 +207,6 @@ const Navbar = () => {
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
                       <UserPlus className="w-4 h-4 text-green-500" />
-                      <span>Register</span>
-                    </Link>
-                    <div className="mt-2 px-4 pt-2 border-t border-gray-100">
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Doctors</p>
-                    </div>
-                    <Link
-                      to="/login"
-                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      onClick={() => setIsProfileMenuOpen(false)}
-                    >
-                      <LogIn className="w-4 h-4 text-primary-500" />
-                      <span>Login</span>
-                    </Link>
-                    <Link
-                      to="/doctor-register"
-                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      onClick={() => setIsProfileMenuOpen(false)}
-                    >
-                      <Stethoscope className="w-4 h-4 text-purple-500" />
                       <span>Register</span>
                     </Link>
                   </div>
@@ -294,9 +272,6 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <div className="px-4 pt-2 pb-1">
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Patients</p>
-                  </div>
                   <Link
                     to="/login"
                     className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
@@ -309,23 +284,6 @@ const Navbar = () => {
                     className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                   >
                     <UserPlus className="w-4 h-4 text-green-500" />
-                    <span>Register</span>
-                  </Link>
-                  <div className="px-4 pt-2 pb-1 mt-1 border-t border-gray-100">
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">For Doctors</p>
-                  </div>
-                  <Link
-                    to="/login"
-                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    <LogIn className="w-4 h-4 text-primary-500" />
-                    <span>Login</span>
-                  </Link>
-                  <Link
-                    to="/doctor-register"
-                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    <Stethoscope className="w-4 h-4 text-purple-500" />
                     <span>Register</span>
                   </Link>
                 </>
