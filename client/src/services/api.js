@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = import.meta.env.PROD
+  ? (import.meta.env.VITE_API_URL_PRODUCTION || 'https://doctor-appointment-system-s6v7.onrender.com/api')
+  : (import.meta.env.VITE_API_URL || 'http://localhost:5000/api')
 
 // Create axios instance
 export const api = axios.create({

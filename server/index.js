@@ -44,6 +44,7 @@ const allowedOrigins = [
   'http://localhost:5174',
   'http://localhost:3000',
   'http://localhost:3001',
+  'https://doctor-appointment-system-swart.vercel.app',
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
