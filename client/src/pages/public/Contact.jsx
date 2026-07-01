@@ -53,14 +53,14 @@ const Contact = () => {
         <div className="container-custom section-padding">
           {/* Header */}
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-emerald-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
               <Sparkles className="w-4 h-4 mr-1.5" />
               Get in Touch
             </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
               Contact Us
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
               Have questions or need assistance? We're here to help.
             </p>
           </div>
@@ -69,38 +69,38 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="lg:col-span-1 space-y-6">
               {contactInfo.map((info, index) => (
-                <div key={index} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary-100 transition-all duration-300 group">
+                <div key={index} className="dark-glass rounded-2xl p-6 border border-white/[0.06] hover:shadow-lg hover:border-primary-100 transition-all duration-300 group">
                   <div className="flex items-start">
                     <div className={`w-12 h-12 bg-gradient-to-br ${info.gradient} rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <info.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-1">{info.label}</h3>
-                      <p className="text-gray-900 mb-1 text-sm">{info.value}</p>
-                      <p className="text-sm text-gray-500">{info.desc}</p>
+                      <h3 className="font-bold text-white mb-1">{info.label}</h3>
+                      <p className="text-white mb-1 text-sm">{info.value}</p>
+                      <p className="text-sm text-gray-400">{info.desc}</p>
                     </div>
                   </div>
                 </div>
               ))}
 
               {/* Office Hours */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-100">
+              <div className="dark-glass rounded-2xl p-6 border border-white/[0.06]">
                 <div className="flex items-center mb-4">
-                  <Clock className="w-5 h-5 text-primary-600 mr-2" />
-                  <h3 className="font-bold text-gray-900">Office Hours</h3>
+                  <Clock className="w-5 h-5 text-emerald-400 mr-2" />
+                  <h3 className="font-bold text-white">Office Hours</h3>
                 </div>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-500">Monday - Friday</span>
-                    <span className="font-semibold text-gray-900">9:00 AM - 6:00 PM</span>
+                  <div className="flex justify-between py-2 border-b border-white/[0.06]">
+                    <span className="text-gray-400">Monday - Friday</span>
+                    <span className="font-semibold text-white">9:00 AM - 6:00 PM</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-500">Saturday</span>
-                    <span className="font-semibold text-gray-900">10:00 AM - 4:00 PM</span>
+                  <div className="flex justify-between py-2 border-b border-white/[0.06]">
+                    <span className="text-gray-400">Saturday</span>
+                    <span className="font-semibold text-white">10:00 AM - 4:00 PM</span>
                   </div>
                   <div className="flex justify-between py-2">
-                    <span className="text-gray-500">Sunday</span>
-                    <span className="font-semibold text-gray-900">Closed</span>
+                    <span className="text-gray-400">Sunday</span>
+                    <span className="font-semibold text-white">Closed</span>
                   </div>
                 </div>
               </div>
@@ -115,13 +115,13 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 sm:p-10">
-                <h2 className="text-2xl font-bold text-gray-900 mb-8">Send us a Message</h2>
+              <div className="dark-glass rounded-2xl shadow-xl shadow-gray-200/50 border border-white/[0.06] p-8 sm:p-10">
+                <h2 className="text-2xl font-bold text-white mb-8">Send us a Message</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Your Name *</label>
+                      <label className="block text-sm font-semibold text-gray-200 mb-1.5">Your Name *</label>
                       <div className="relative">
                         <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
                         <input {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Min 2 characters' } })} type="text" autoComplete="name" className="input pl-11" placeholder="John Doe" />
@@ -130,7 +130,7 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address *</label>
+                      <label className="block text-sm font-semibold text-gray-200 mb-1.5">Email Address *</label>
                       <div className="relative">
                         <Mail className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
                         <input {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })} type="email" autoComplete="email" className="input pl-11" placeholder="john@example.com" />
@@ -140,7 +140,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-1.5">Phone Number</label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
                       <input {...register('phone', { pattern: { value: /^[0-9]{10}$/, message: 'Valid 10-digit number' } })} type="tel" autoComplete="tel" className="input pl-11" placeholder="(555) 123-4567" />
@@ -149,7 +149,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Subject *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-1.5">Subject *</label>
                     <select {...register('subject', { required: 'Select a subject' })} className="input">
                       <option value="">Select a subject</option>
                       <option value="general">General Inquiry</option>
@@ -162,7 +162,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Message *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-1.5">Message *</label>
                     <div className="relative">
                       <MessageSquare className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
                       <textarea {...register('message', { required: 'Message is required', minLength: { value: 10, message: 'Min 10 characters' } })} rows={5} className="input pl-11 resize-none" placeholder="How can we help you?" />
@@ -173,7 +173,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-primary-600 to-purple-600 text-white py-3.5 rounded-xl font-bold hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3.5 rounded-xl font-bold hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {isLoading ? (
                       <>
@@ -198,21 +198,21 @@ const Contact = () => {
           {/* FAQ */}
           <div className="mt-20">
             <div className="text-center mb-12">
-              <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+              <span className="inline-flex items-center px-4 py-1.5 bg-emerald-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
                 <MessageSquare className="w-4 h-4 mr-1.5" />
                 FAQ
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">Quick Answers</h2>
-              <p className="text-gray-600">Frequently asked questions</p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Quick Answers</h2>
+              <p className="text-gray-300">Frequently asked questions</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary-100 transition-all duration-300">
-                  <h3 className="font-bold text-gray-900 mb-2 flex items-start">
-                    <ChevronRight className="w-5 h-5 text-primary-600 mr-2 flex-shrink-0 mt-0.5" />
+                <div key={index} className="dark-glass rounded-2xl p-6 border border-white/[0.06] hover:shadow-lg hover:border-primary-100 transition-all duration-300">
+                  <h3 className="font-bold text-white mb-2 flex items-start">
+                    <ChevronRight className="w-5 h-5 text-emerald-400 mr-2 flex-shrink-0 mt-0.5" />
                     {faq.q}
                   </h3>
-                  <p className="text-gray-600 text-sm pl-7">{faq.a}</p>
+                  <p className="text-gray-300 text-sm pl-7">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -221,15 +221,15 @@ const Contact = () => {
           {/* Map */}
           <div className="mt-20">
             <div className="text-center mb-8">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">Visit Our Office</h2>
-              <p className="text-gray-600">Find us at our headquarters in Medical District</p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Visit Our Office</h2>
+              <p className="text-gray-300">Find us at our headquarters in Medical District</p>
             </div>
-            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg">
+            <div className="dark-glass rounded-2xl border border-white/[0.06] overflow-hidden shadow-lg">
               <div className="aspect-[16/7] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                 <div className="text-center">
-                  <MapPin className="w-16 h-16 text-primary-600 mx-auto mb-4" />
-                  <p className="text-lg font-bold text-gray-900">DocCare Headquarters</p>
-                  <p className="text-gray-600">123 Healthcare Ave, Medical District, MD 12345</p>
+                  <MapPin className="w-16 h-16 text-emerald-400 mx-auto mb-4" />
+                  <p className="text-lg font-bold text-white">DocCare Headquarters</p>
+                  <p className="text-gray-300">123 Healthcare Ave, Medical District, MD 12345</p>
                 </div>
               </div>
             </div>

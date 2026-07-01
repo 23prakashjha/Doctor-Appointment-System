@@ -176,7 +176,7 @@ const Home = () => {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center bg-transparent overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
@@ -191,13 +191,13 @@ const Home = () => {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left column */}
               <div className="space-y-8 animate-fade-in-up">
-                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-200/50">
-                  <Sparkles className="w-4 h-4 mr-2 text-primary-600" />
+                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-emerald-400 rounded-full text-sm font-medium border border-emerald-400/20">
+                  <Sparkles className="w-4 h-4 mr-2 text-emerald-400" />
                   Your Health, Our Priority
                   <span className="ml-2 w-2 h-2 bg-green-500 rounded-full animate-pulse-soft"></span>
                 </div>
 
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-[1.1] tracking-tight">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
                   Your Health is
                   <br />
                   <span className="gradient-text">
@@ -205,12 +205,12 @@ const Home = () => {
                   </span>
                 </h1>
 
-                <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
+                <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
                   Connect with top-rated doctors, book appointments instantly, and manage your health journey with our comprehensive healthcare platform.
                 </p>
 
                 {/* Search Bar */}
-                <form onSubmit={handleSearch} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl shadow-blue-500/5 p-2 flex flex-col sm:flex-row gap-2 border border-gray-100">
+                <form onSubmit={handleSearch} className="bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-xl shadow-blue-500/5 p-2 flex flex-col sm:flex-row gap-2 border border-white/[0.06]">
                   <div className="flex-1 flex items-center px-4">
                     <Search className="w-5 h-5 text-gray-400 mr-3" />
                     <input
@@ -218,12 +218,12 @@ const Home = () => {
                       placeholder="Search doctors, specialties..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full py-3 outline-none text-gray-700 placeholder-gray-400 bg-transparent"
+                      className="w-full py-3 outline-none text-gray-200 placeholder-gray-400 bg-transparent"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 flex items-center justify-center group"
+                    className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 flex items-center justify-center group"
                   >
                     Find Doctors
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -232,12 +232,12 @@ const Home = () => {
 
                 {/* Quick search tags */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-gray-500 text-sm font-medium">Quick search:</span>
+                  <span className="text-gray-400 text-sm font-medium">Quick search:</span>
                   {['Fever', 'Cough', 'Headache', 'Diabetes', 'Blood Pressure'].map((disease) => (
                     <button
                       key={disease}
                       onClick={() => setSearchQuery(disease)}
-                      className="px-4 py-1.5 bg-white/70 backdrop-blur-sm hover:bg-white border border-gray-200 hover:border-primary-300 rounded-full text-sm text-gray-600 hover:text-primary-700 transition-all duration-200 shadow-sm"
+                      className="px-4 py-1.5 bg-white/[0.08] backdrop-blur-sm hover:bg-white/[0.12] border border-white/[0.08] hover:border-emerald-400/30 rounded-full text-sm text-gray-300 hover:text-emerald-400 transition-all duration-200 shadow-sm"
                     >
                       {disease}
                     </button>
@@ -245,7 +245,7 @@ const Home = () => {
                 </div>
 
                 {/* Trust indicators */}
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                <div className="flex items-center space-x-6 text-sm text-gray-400">
                   <div className="flex items-center">
                     <Shield className="w-4 h-4 text-green-500 mr-1.5" />
                     <span>HIPAA Compliant</span>
@@ -259,26 +259,26 @@ const Home = () => {
 
               {/* Right column - Stats grid */}
               <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl shadow-blue-500/10 border border-white/50">
+                <div className="bg-gray-900/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl shadow-blue-500/10 border border-white/50">
                   <div className="grid grid-cols-2 gap-4">
                     {heroStats.map((stat, index) => (
-                      <div key={index} className="bg-white rounded-2xl p-5 sm:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                      <div key={index} className="dark-glass rounded-2xl p-5 sm:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
                         <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                           <stat.icon className="w-6 h-6 text-white" />
                         </div>
-                        <div className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</div>
-                        <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
+                        <div className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
+                        <div className="text-sm text-gray-400 mt-1">{stat.label}</div>
                       </div>
                     ))}
                   </div>
                   <div className="mt-4 pt-4 border-t border-white/50 text-center">
-                    <div className="flex items-center justify-center space-x-1 text-sm text-gray-500">
+                    <div className="flex items-center justify-center space-x-1 text-sm text-gray-400">
                       <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                       <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                       <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                       <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                       <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <span className="ml-2 font-medium text-gray-700">4.9</span>
+                      <span className="ml-2 font-medium text-gray-200">4.9</span>
                       <span className="text-gray-400">(2.5k+ reviews)</span>
                     </div>
                   </div>
@@ -290,17 +290,17 @@ const Home = () => {
       </section>
 
       {/* ==================== SERVICES SECTION ==================== */}
-      <section className="py-20 lg:py-28 bg-white">
+<section className="py-20 lg:py-28 dark-glass">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-blue-50 text-primary-700 rounded-full text-sm font-medium border border-blue-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-emerald-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
               <Activity className="w-4 h-4 mr-1.5" />
               Our Services
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               Comprehensive Healthcare Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Everything you need for your healthcare journey, all in one place
             </p>
           </div>
@@ -308,14 +308,14 @@ const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {services.map((service, index) => (
               <div key={index} className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative bg-white rounded-2xl p-8 border border-gray-100 group-hover:border-transparent group-hover:shadow-2xl group-hover:shadow-blue-500/10 transition-all duration-500 group-hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative dark-glass rounded-2xl p-8 border border-white/[0.06] group-hover:border-transparent group-hover:shadow-2xl group-hover:shadow-blue-500/10 transition-all duration-500 group-hover:-translate-y-2">
                   <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                     <service.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{service.description}</p>
-                  <div className="mt-6 flex items-center text-sm font-semibold text-primary-600 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                  <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
+                  <p className="text-gray-300 leading-relaxed">{service.description}</p>
+                  <div className="mt-6 flex items-center text-sm font-semibold text-emerald-400 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                     Learn more
                     <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -327,24 +327,24 @@ const Home = () => {
       </section>
 
       {/* ==================== DISEASE SEARCH ==================== */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-green-50 via-white to-blue-50 relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-transparent relative overflow-hidden">
         <div className="absolute inset-0 bg-dots opacity-[0.03]"></div>
         <div className="container-custom relative">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-green-50 text-green-700 rounded-full text-sm font-medium border border-green-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-emerald-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
               <Search className="w-4 h-4 mr-1.5" />
               Find by Condition
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               Search by Disease or Condition
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Find specialized doctors for your specific health concerns
             </p>
           </div>
 
           <div className="max-w-2xl mx-auto">
-            <form onSubmit={handleDiseaseSearch} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl shadow-green-500/5 p-2 flex flex-col sm:flex-row gap-2 border border-gray-100">
+            <form onSubmit={handleDiseaseSearch} className="bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-xl shadow-green-500/5 p-2 flex flex-col sm:flex-row gap-2 border border-white/[0.06]">
               <div className="flex-1 flex items-center px-4">
                 <Search className="w-5 h-5 text-gray-400 mr-3" />
                 <input
@@ -352,7 +352,7 @@ const Home = () => {
                   placeholder="Search diseases, conditions, symptoms..."
                   value={diseaseSearch}
                   onChange={(e) => setDiseaseSearch(e.target.value)}
-                  className="w-full py-3 outline-none text-gray-700 placeholder-gray-400 bg-transparent"
+                  className="w-full py-3 outline-none text-gray-200 placeholder-gray-400 bg-transparent"
                 />
               </div>
               <button
@@ -365,7 +365,7 @@ const Home = () => {
             </form>
 
             <div className="mt-10">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
                 <TrendingUp className="w-5 h-5 text-green-500 mr-2" />
                 Popular Conditions:
               </h3>
@@ -375,7 +375,7 @@ const Home = () => {
                     <button
                       key={disease._id}
                       onClick={() => setDiseaseSearch(disease.name)}
-                      className="px-4 py-2 bg-white hover:bg-green-50 border border-gray-200 hover:border-green-300 rounded-full text-sm text-gray-700 hover:text-green-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="px-4 py-2 bg-white/[0.08] hover:bg-green-500/10 border border-white/[0.08] hover:border-green-400/30 rounded-full text-sm text-gray-200 hover:text-emerald-400 transition-all duration-200 shadow-sm hover:shadow-md"
                     >
                       {disease.name}
                     </button>
@@ -385,7 +385,7 @@ const Home = () => {
                     <button
                       key={disease}
                       onClick={() => setDiseaseSearch(disease)}
-                      className="px-4 py-2 bg-white hover:bg-green-50 border border-gray-200 hover:border-green-300 rounded-full text-sm text-gray-700 hover:text-green-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="px-4 py-2 bg-white/[0.08] hover:bg-green-500/10 border border-white/[0.08] hover:border-green-400/30 rounded-full text-sm text-gray-200 hover:text-emerald-400 transition-all duration-200 shadow-sm hover:shadow-md"
                     >
                       {disease}
                     </button>
@@ -398,17 +398,17 @@ const Home = () => {
       </section>
 
       {/* ==================== HOW IT WORKS ==================== */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28 dark-glass">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-purple-50 text-purple-700 rounded-full text-sm font-medium border border-purple-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-purple-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
               <Play className="w-4 h-4 mr-1.5" />
               Simple Process
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Book your appointment in 4 simple steps
             </p>
           </div>
@@ -421,12 +421,12 @@ const Home = () => {
                     <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-xl shadow-purple-500/20 group-hover:shadow-2xl group-hover:shadow-purple-500/30 group-hover:-translate-y-1 transition-all duration-300">
                       <step.icon className="w-11 h-11 text-white" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-purple-500">
-                      <span className="text-sm font-bold text-purple-600">{step.step}</span>
+                    <div className="absolute -top-2 -right-2 w-9 h-9 bg-gray-900 rounded-full flex items-center justify-center shadow-lg border-2 border-purple-500">
+                      <span className="text-sm font-bold text-purple-400">{step.step}</span>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-gray-300 leading-relaxed">{step.description}</p>
                 </div>
                 {index < appointmentSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-12 -right-6">
@@ -440,18 +440,18 @@ const Home = () => {
       </section>
 
       {/* ==================== FEATURES ==================== */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-[0.02]"></div>
         <div className="container-custom relative">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-blue-50 text-primary-700 rounded-full text-sm font-medium border border-blue-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-emerald-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
               <Award className="w-4 h-4 mr-1.5" />
               Why Choose Us
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               Why DocCare?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Experience healthcare that puts you first
             </p>
           </div>
@@ -462,8 +462,8 @@ const Home = () => {
                 <div className={`w-24 h-24 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300`}>
                   <feature.icon className="w-11 h-11 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -471,24 +471,24 @@ const Home = () => {
       </section>
 
       {/* ==================== FEATURED DOCTORS ==================== */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28 dark-glass">
         <div className="container-custom">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12">
             <div>
-              <span className="inline-flex items-center px-4 py-1.5 bg-blue-50 text-primary-700 rounded-full text-sm font-medium border border-blue-100 mb-4">
+              <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-emerald-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
                 <Users className="w-4 h-4 mr-1.5" />
                 Our Professionals
               </span>
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-2">
                 Featured Doctors
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-300">
                 Top-rated medical professionals ready to help you
               </p>
             </div>
             <Link
               to="/doctors"
-              className="hidden sm:inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold group mt-4 sm:mt-0"
+              className="hidden sm:inline-flex items-center text-emerald-400 hover:text-emerald-400 font-semibold group mt-4 sm:mt-0"
             >
               View All Doctors
               <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -498,12 +498,12 @@ const Home = () => {
           {loading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100">
+                <div key={i} className="dark-glass rounded-2xl p-6 border border-white/[0.06]">
                   <div className="animate-pulse">
-                    <div className="w-full h-48 bg-gray-200 rounded-xl mb-4"></div>
-                    <div className="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                    <div className="w-full h-48 bg-white/[0.08] rounded-xl mb-4"></div>
+                    <div className="h-5 bg-white/[0.08] rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-white/[0.08] rounded w-1/2 mb-2"></div>
+                    <div className="h-4 bg-white/[0.08] rounded w-1/4"></div>
                   </div>
                 </div>
               ))}
@@ -512,7 +512,7 @@ const Home = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredDoctors.map((doctor) => (
                 <div key={doctor.id} className="group">
-                  <div className="bg-white rounded-2xl border border-gray-100 group-hover:border-primary-100 group-hover:shadow-2xl group-hover:shadow-primary-500/10 transition-all duration-500 overflow-hidden group-hover:-translate-y-1">
+                  <div className="dark-glass rounded-2xl border border-white/[0.06] group-hover:border-emerald-400/20 group-hover:shadow-2xl group-hover:shadow-emerald-500/10 transition-all duration-500 overflow-hidden group-hover:-translate-y-1">
                     <div className="relative overflow-hidden">
                       <img
                         src={doctor.image}
@@ -520,29 +520,29 @@ const Home = () => {
                         className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5 ${doctor.isAvailable ? 'text-green-600' : 'text-gray-500'}">
+                      <div className="absolute top-4 right-4 bg-gray-900/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5 ${doctor.isAvailable ? 'text-green-600' : 'text-gray-400'}">
                         <span className={`w-2 h-2 rounded-full ${doctor.isAvailable ? 'bg-green-500 animate-pulse-soft' : 'bg-gray-400'}`}></span>
                         {doctor.isAvailable ? 'Available' : 'Unavailable'}
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
-                      <p className="text-gray-500 mb-3">{doctor.specialization}</p>
+                      <h3 className="text-xl font-bold text-white mb-1">{doctor.name}</h3>
+                      <p className="text-gray-400 mb-3">{doctor.specialization}</p>
                       <div className="flex items-center mb-4">
                         <div className="flex text-yellow-400">
                           {[...Array(5)].map((_, i) => (
                             <Star key={i} className={`w-4 h-4 ${i < Math.floor(doctor.rating) ? 'fill-current' : ''}`} />
                           ))}
                         </div>
-                        <span className="ml-2 text-sm text-gray-500">({doctor.rating})</span>
+                        <span className="ml-2 text-sm text-gray-400">({doctor.rating})</span>
                       </div>
-                      <div className="flex items-center text-sm text-gray-500 mb-4">
+                      <div className="flex items-center text-sm text-gray-400 mb-4">
                         <MapPin className="w-4 h-4 mr-1.5" />
                         {doctor.city}
                       </div>
                       <Link
                         to={`/doctors/${doctor.id}`}
-                        className="w-full bg-gradient-to-r from-primary-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 text-center block group-hover:shadow-xl"
+                        className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 text-center block group-hover:shadow-xl"
                       >
                         View Profile
                       </Link>
@@ -553,18 +553,18 @@ const Home = () => {
             </div>
           ) : (
             <div className="text-center py-16">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-24 h-24 bg-white/[0.06] rounded-full flex items-center justify-center mx-auto mb-6">
                 <Users className="w-12 h-12 text-gray-400" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">No doctors available</h3>
-              <p className="text-gray-600">Check back later for available doctors</p>
+              <h3 className="text-2xl font-bold text-white mb-2">No doctors available</h3>
+              <p className="text-gray-300">Check back later for available doctors</p>
             </div>
           )}
 
           <div className="sm:hidden mt-8 text-center">
             <Link
               to="/doctors"
-              className="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold"
+              className="inline-flex items-center text-emerald-400 hover:text-emerald-400 font-semibold"
             >
               View All Doctors
               <ChevronRight className="w-5 h-5 ml-1" />
@@ -574,25 +574,25 @@ const Home = () => {
       </section>
 
       {/* ==================== BLOGS ==================== */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-purple-50 via-white to-blue-50 relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-transparent relative overflow-hidden">
         <div className="absolute inset-0 bg-dots opacity-[0.03]"></div>
         <div className="container-custom relative">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12">
             <div>
-              <span className="inline-flex items-center px-4 py-1.5 bg-purple-50 text-purple-700 rounded-full text-sm font-medium border border-purple-100 mb-4">
+              <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-purple-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
                 <BookOpen className="w-4 h-4 mr-1.5" />
                 Health Tips
               </span>
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-2">
                 Latest Health Blogs
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-300">
                 Expert insights and health tips from medical professionals
               </p>
             </div>
             <Link
               to="/blogs"
-              className="hidden sm:inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold group mt-4 sm:mt-0"
+              className="hidden sm:inline-flex items-center text-emerald-400 hover:text-emerald-400 font-semibold group mt-4 sm:mt-0"
             >
               View All Blogs
               <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -602,14 +602,14 @@ const Home = () => {
           {loading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                <div key={i} className="dark-glass rounded-2xl overflow-hidden shadow-lg">
                   <div className="animate-pulse">
-                    <div className="w-full h-52 bg-gray-200"></div>
+                    <div className="w-full h-52 bg-white/[0.08]"></div>
                     <div className="p-6">
-                      <div className="h-4 bg-gray-200 rounded w-1/4 mb-3"></div>
-                      <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
-                      <div className="h-4 bg-gray-200 rounded w-full mb-1"></div>
-                      <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                      <div className="h-4 bg-white/[0.08] rounded w-1/4 mb-3"></div>
+                      <div className="h-6 bg-white/[0.08] rounded w-3/4 mb-2"></div>
+                      <div className="h-4 bg-white/[0.08] rounded w-full mb-1"></div>
+                      <div className="h-4 bg-white/[0.08] rounded w-2/3"></div>
                     </div>
                   </div>
                 </div>
@@ -623,7 +623,7 @@ const Home = () => {
                   to={`/blogs/${blog.slug}`}
                   className="group"
                 >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-1 h-full">
+                  <div className="dark-glass rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-1 h-full">
                     <div className="relative overflow-hidden">
                       <img
                         src={blog.image}
@@ -632,25 +632,25 @@ const Home = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                       <div className="absolute top-4 left-4">
-                        <span className="bg-white/90 backdrop-blur-sm text-primary-700 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                        <span className="bg-gray-900/80 backdrop-blur-sm text-emerald-400 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
                           {blog.category}
                         </span>
                       </div>
                     </div>
                     <div className="p-6">
-                      <div className="flex items-center text-sm text-gray-500 mb-3">
+                      <div className="flex items-center text-sm text-gray-400 mb-3">
                         <BookOpen className="w-4 h-4 mr-1.5" />
                         {blog.readTime} min read
                         <span className="mx-2">•</span>
                         <span>{new Date(blog.date).toLocaleDateString()}</span>
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
+                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors line-clamp-2">
                         {blog.title}
                       </h3>
-                      <p className="text-gray-600 line-clamp-3 leading-relaxed">
+                      <p className="text-gray-300 line-clamp-3 leading-relaxed">
                         {blog.summary}
                       </p>
-                      <div className="mt-4 flex items-center text-primary-600 font-semibold group-hover:text-primary-700">
+                      <div className="mt-4 flex items-center text-emerald-400 font-semibold group-hover:text-emerald-400">
                         Read More
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                       </div>
@@ -661,18 +661,18 @@ const Home = () => {
             </div>
           ) : (
             <div className="text-center py-16">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-24 h-24 bg-white/[0.06] rounded-full flex items-center justify-center mx-auto mb-6">
                 <BookOpen className="w-12 h-12 text-gray-400" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">No blogs available</h3>
-              <p className="text-gray-600">Check back later for health articles and tips</p>
+              <h3 className="text-2xl font-bold text-white mb-2">No blogs available</h3>
+              <p className="text-gray-300">Check back later for health articles and tips</p>
             </div>
           )}
 
           <div className="sm:hidden mt-8 text-center">
             <Link
               to="/blogs"
-              className="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold"
+              className="inline-flex items-center text-emerald-400 hover:text-emerald-400 font-semibold"
             >
               View All Blogs
               <ChevronRight className="w-5 h-5 ml-1" />
@@ -682,33 +682,33 @@ const Home = () => {
       </section>
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500 opacity-50"></div>
+      <section className="py-20 lg:py-28 dark-glass relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 opacity-50"></div>
         <div className="container-custom">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-yellow-50 text-yellow-700 rounded-full text-sm font-medium border border-yellow-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-amber-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
               <Star className="w-4 h-4 mr-1.5 fill-yellow-500 text-yellow-500" />
               Testimonials
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               What Our Patients Say
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Real experiences from our valued patients
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-1">
-                <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-xl">
+              <div className="bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-3xl p-1">
+                <div className="dark-glass rounded-2xl p-8 sm:p-10 shadow-xl">
                   <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-5 shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-5 shadow-lg">
                       {testimonials[currentTestimonial].avatar}
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-gray-900">{testimonials[currentTestimonial].name}</h4>
-                      <p className="text-gray-500">{testimonials[currentTestimonial].role}</p>
+                      <h4 className="text-xl font-bold text-white">{testimonials[currentTestimonial].name}</h4>
+                      <p className="text-gray-400">{testimonials[currentTestimonial].role}</p>
                     </div>
                   </div>
                   <div className="flex text-yellow-400 mb-6">
@@ -716,7 +716,7 @@ const Home = () => {
                       <Star key={i} className="w-5 h-5 fill-current" />
                     ))}
                   </div>
-                  <blockquote className="text-lg sm:text-xl text-gray-700 leading-relaxed italic">
+                  <blockquote className="text-lg sm:text-xl text-gray-200 leading-relaxed italic">
                     &ldquo;{testimonials[currentTestimonial].content}&rdquo;
                   </blockquote>
                 </div>
@@ -730,8 +730,8 @@ const Home = () => {
                     onClick={() => setCurrentTestimonial(index)}
                     className={`transition-all duration-300 rounded-full ${
                       index === currentTestimonial
-                        ? 'w-8 h-3 bg-gradient-to-r from-primary-500 to-purple-600'
-                        : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                        ? 'w-8 h-3 bg-gradient-to-r from-emerald-500 to-emerald-600'
+                        : 'w-3 h-3 bg-white/[0.2] hover:bg-white/[0.3]'
                     }`}
                   />
                 ))}
@@ -742,17 +742,17 @@ const Home = () => {
       </section>
 
       {/* ==================== FAQ ==================== */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-blue-50/50">
+      <section className="py-20 lg:py-28 bg-transparent">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center px-4 py-1.5 bg-blue-50 text-primary-700 rounded-full text-sm font-medium border border-blue-100 mb-4">
+            <span className="inline-flex items-center px-4 py-1.5 bg-white/[0.08] text-emerald-400 rounded-full text-sm font-medium border border-white/[0.08] mb-4">
               <HelpCircle className="w-4 h-4 mr-1.5" />
               FAQ
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Get answers to common questions about our healthcare services
             </p>
           </div>
@@ -760,24 +760,24 @@ const Home = () => {
           <div className="max-w-3xl mx-auto">
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-primary-200 transition-colors duration-200">
+                <div key={index} className="dark-glass rounded-2xl overflow-hidden border-emerald-400/20 transition-colors duration-200">
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50/50 transition-colors"
+                    className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.03] transition-colors"
                   >
                     <div className="flex items-center flex-1 pr-4">
-                      <HelpCircle className="w-5 h-5 text-primary-600 mr-3 flex-shrink-0" />
-                      <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
+                      <HelpCircle className="w-5 h-5 text-emerald-400 mr-3 flex-shrink-0" />
+                      <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
                     </div>
-                    <div className={`flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 transition-all duration-300 ${
-                      expandedFAQ === index ? 'bg-primary-100 text-primary-600 rotate-45' : 'text-gray-400'
+                    <div className={`flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.08] transition-all duration-300 ${
+                      expandedFAQ === index ? 'bg-emerald-500/10 text-emerald-400 rotate-45' : 'text-gray-400'
                     }`}>
                       <Plus className="w-5 h-5" />
                     </div>
                   </button>
                   {expandedFAQ === index && (
                     <div className="px-6 pb-5 animate-slide-down">
-                      <p className="text-gray-600 leading-relaxed pl-8">{faq.answer}</p>
+                      <p className="text-gray-300 leading-relaxed pl-8">{faq.answer}</p>
                     </div>
                   )}
                 </div>
@@ -789,7 +789,7 @@ const Home = () => {
 
       {/* ==================== NEWSLETTER ==================== */}
       <section className="relative py-20 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-600 via-primary-700 to-purple-700"></div>
+        <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06]"></div>
         <div className="absolute inset-0 bg-grid opacity-[0.05]"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
@@ -815,13 +815,13 @@ const Home = () => {
                     placeholder="Enter your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-5 py-3.5 rounded-xl text-gray-900 placeholder-gray-500 outline-none focus:ring-2 focus:ring-white/30 shadow-lg"
+                    className="w-full px-5 py-3.5 rounded-xl text-white placeholder-gray-500 outline-none focus:ring-2 focus:ring-white/30 shadow-lg"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="bg-white text-primary-700 px-6 py-3.5 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+                  className="bg-white text-emerald-400 px-6 py-3.5 rounded-xl font-semibold hover:bg-white/[0.08] transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
                 >
                   Subscribe
                   <Send className="w-4 h-4 ml-2" />
@@ -850,7 +850,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/doctors"
-              className="bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-primary-500/30 transition-all duration-300 hover:-translate-y-0.5"
+              className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-0.5"
             >
               Browse Doctors
             </Link>

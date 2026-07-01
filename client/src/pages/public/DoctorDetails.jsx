@@ -28,11 +28,11 @@ const DoctorDetails = () => {
 
   if (loading) {
     return (
-      <div className="pt-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
+      <div className="pt-16 bg-transparent min-h-screen">
         <div className="container-custom section-padding">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-            <div className="bg-white rounded-2xl p-8 border border-gray-100">
+            <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8">
               <div className="flex items-start space-x-6">
                 <div className="w-32 h-32 bg-gray-200 rounded-full"></div>
                 <div className="flex-1 space-y-3">
@@ -52,11 +52,11 @@ const DoctorDetails = () => {
     return (
       <div className="pt-16 min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20 bg-white/[0.06] rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Stethoscope className="w-10 h-10 text-gray-400" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Doctor not found</h2>
-          <p className="text-gray-600 mb-6">The doctor you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-white mb-2">Doctor not found</h2>
+          <p className="text-gray-300 mb-6">The doctor you're looking for doesn't exist.</p>
           <Link to="/doctors" className="btn-primary">Back to Doctors</Link>
         </div>
       </div>
@@ -64,14 +64,14 @@ const DoctorDetails = () => {
   }
 
   return (
-    <div className="pt-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
+    <div className="pt-16 bg-transparent min-h-screen">
       <div className="container-custom section-padding">
-        <button onClick={() => navigate(-1)} className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6 font-medium group">
+        <button onClick={() => navigate(-1)} className="inline-flex items-center text-gray-300 hover:text-white mb-6 font-medium group">
           <ChevronLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" />
           Back to Doctors
         </button>
 
-        <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 mb-8">
+        <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8 mb-8">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-shrink-0">
               <img src={doctor.image} alt={doctor.name} className="w-32 h-32 rounded-2xl object-cover shadow-lg" />
@@ -79,19 +79,19 @@ const DoctorDetails = () => {
             <div className="flex-1">
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4">
                 <div>
-                  <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">{doctor.name}</h1>
-                  <p className="text-lg text-gray-600 mb-4">{doctor.specialization}</p>
+                  <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">{doctor.name}</h1>
+                  <p className="text-lg text-gray-300 mb-4">{doctor.specialization}</p>
                   <div className="flex flex-wrap gap-4">
                     <div className="flex items-center">
                       <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                       <span className="ml-1.5 font-bold">{doctor.rating}</span>
-                      <span className="text-gray-500 ml-1">({doctor.reviewCount} reviews)</span>
+                      <span className="text-gray-400 ml-1">({doctor.reviewCount} reviews)</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
+                    <div className="flex items-center text-gray-300">
                       <Clock className="w-5 h-5 mr-1.5" />
                       {doctor.experience} years exp.
                     </div>
-                    <div className="flex items-center text-gray-600">
+                    <div className="flex items-center text-gray-300">
                       <MapPin className="w-5 h-5 mr-1.5" />
                       {doctor.city}
                     </div>
@@ -99,8 +99,8 @@ const DoctorDetails = () => {
                 </div>
                 <div className="flex flex-col items-start lg:items-end gap-4">
                   <div className="text-right">
-                    <p className="text-sm text-gray-500">Consultation Fee</p>
-                    <p className="text-3xl font-extrabold text-primary-600">₹{doctor.consultationFee}</p>
+                    <p className="text-sm text-gray-400">Consultation Fee</p>
+                    <p className="text-3xl font-extrabold text-emerald-400">₹{doctor.consultationFee}</p>
                   </div>
                   <div className="flex gap-2">
                     <button className="btn-outline btn-sm"><Heart className="w-4 h-4" /></button>
@@ -114,29 +114,29 @@ const DoctorDetails = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">About</h2>
-              <p className="text-gray-700 leading-relaxed">{doctor.bio}</p>
+            <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8">
+              <h2 className="text-xl font-bold text-white mb-4">About</h2>
+              <p className="text-gray-200 leading-relaxed">{doctor.bio}</p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Qualifications</h2>
+            <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Qualifications</h2>
               <div className="flex items-start">
-                <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                  <Award className="w-5 h-5 text-primary-600" />
+                <div className="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                  <Award className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900">{doctor.qualification}</p>
-                  <p className="text-sm text-gray-500">Primary Qualification</p>
+                  <p className="font-bold text-white">{doctor.qualification}</p>
+                  <p className="text-sm text-gray-400">Primary Qualification</p>
                 </div>
               </div>
             </div>
 
             {doctor.languages?.length > 0 && (
-              <div className="bg-white rounded-2xl border border-gray-100 p-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Languages</h2>
+              <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8">
+                <h2 className="text-xl font-bold text-white mb-4">Languages</h2>
                 <div className="flex items-center space-x-2">
-                  <Languages className="w-5 h-5 text-gray-500" />
+                  <Languages className="w-5 h-5 text-gray-400" />
                   <div className="flex flex-wrap gap-2">
                     {doctor.languages.map((lang, i) => <span key={i} className="badge-secondary">{lang}</span>)}
                   </div>
@@ -146,42 +146,42 @@ const DoctorDetails = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Clinic Information</h2>
+            <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Clinic Information</h2>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <MapPin className="w-5 h-5 text-gray-500 mr-3 mt-0.5" />
+                  <MapPin className="w-5 h-5 text-gray-400 mr-3 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-gray-900">Address</p>
-                    <p className="text-sm text-gray-600">{doctor.clinicAddress}</p>
+                    <p className="font-semibold text-white">Address</p>
+                    <p className="text-sm text-gray-300">{doctor.clinicAddress}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Briefcase className="w-5 h-5 text-gray-500 mr-3" />
+                  <Briefcase className="w-5 h-5 text-gray-400 mr-3" />
                   <div>
-                    <p className="font-semibold text-gray-900">Clinic</p>
-                    <p className="text-sm text-gray-600">{doctor.clinicName}</p>
+                    <p className="font-semibold text-white">Clinic</p>
+                    <p className="text-sm text-gray-300">{doctor.clinicName}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Clock className="w-5 h-5 text-gray-500 mr-3" />
+                  <Clock className="w-5 h-5 text-gray-400 mr-3" />
                   <div>
-                    <p className="font-semibold text-gray-900">Working Hours</p>
-                    <p className="text-sm text-gray-600">{doctor.workingHours}</p>
+                    <p className="font-semibold text-white">Working Hours</p>
+                    <p className="text-sm text-gray-300">{doctor.workingHours}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Award className="w-5 h-5 text-gray-500 mr-3" />
+                  <Award className="w-5 h-5 text-gray-400 mr-3" />
                   <div>
-                    <p className="font-semibold text-gray-900">Experience</p>
-                    <p className="text-sm text-gray-600">{doctor.experience} years</p>
+                    <p className="font-semibold text-white">Experience</p>
+                    <p className="text-sm text-gray-300">{doctor.experience} years</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Availability</h2>
+            <div className="bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] shadow-xl rounded-2xl p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Availability</h2>
               <div className="flex items-center text-green-600">
                 <CheckCircle className="w-5 h-5 mr-2" />
                 <span className="font-semibold">{doctor.isAvailable ? 'Available for consultations' : 'Currently unavailable'}</span>

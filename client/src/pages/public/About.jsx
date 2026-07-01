@@ -67,21 +67,21 @@ const About = () => {
 
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-28 bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-hidden">
+        <section className="relative py-20 lg:py-28 bg-transparent overflow-hidden">
           <div className="absolute inset-0 bg-grid opacity-[0.03]"></div>
           <div className="container-custom relative">
             <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl mb-6 shadow-xl shadow-primary-500/20">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl mb-6 shadow-xl shadow-emerald-500/20">
                 <Stethoscope className="w-10 h-10 text-white" />
               </div>
-              <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+              <span className="inline-flex items-center px-4 py-1.5 bg-emerald-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
                 <Sparkles className="w-4 h-4 mr-1.5" />
                 About Us
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6">
                 About <span className="gradient-text">DocCare</span>
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
                 We're on a mission to make quality healthcare accessible, convenient, and affordable for everyone.
                 Our platform connects patients with certified doctors, making it easier than ever to manage your health.
               </p>
@@ -98,7 +98,7 @@ const About = () => {
         </section>
 
         {/* Stats */}
-        <section className="py-16 bg-white border-y border-gray-100">
+        <section className="py-16 dark-glass border-y border-white/[0.06]">
           <div className="container-custom">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
@@ -106,8 +106,8 @@ const About = () => {
                   <div className={`w-16 h-16 bg-gradient-to-br ${stat.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300`}>
                     <stat.icon className="w-8 h-8 text-white" />
                   </div>
-                  <div className="text-3xl font-extrabold text-gray-900 mb-1">{stat.value}</div>
-                  <div className="text-gray-500 font-medium">{stat.label}</div>
+                  <div className="text-3xl font-extrabold text-white mb-1">{stat.value}</div>
+                  <div className="text-gray-400 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -119,19 +119,19 @@ const About = () => {
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
-                <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+                <span className="inline-flex items-center px-4 py-1.5 bg-emerald-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
                   <Target className="w-4 h-4 mr-1.5" />
                   Our Mission
                 </span>
-                <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">
                   Transforming Healthcare Access
                 </h2>
-                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                   At DocCare, we believe that everyone deserves access to quality healthcare.
                   Our mission is to bridge the gap between patients and healthcare providers through
                   innovative technology and compassionate service.
                 </p>
-                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                   We strive to make healthcare more accessible by eliminating geographical barriers,
                   reducing wait times, and providing transparent information about doctors and their services.
                 </p>
@@ -146,8 +146,8 @@ const About = () => {
                         <item.icon className={`w-5 h-5 ${item.color}`} />
                       </div>
                       <div>
-                        <h3 className="font-bold text-gray-900">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.desc}</p>
+                        <h3 className="font-bold text-white">{item.title}</h3>
+                        <p className="text-gray-300 text-sm">{item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -156,7 +156,7 @@ const About = () => {
               <div className="relative">
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-100 rounded-full blur-3xl opacity-60"></div>
                 <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-60"></div>
-                <div className="relative bg-white rounded-3xl shadow-2xl shadow-gray-200/50 p-8 sm:p-10 border border-gray-100">
+                <div className="relative dark-glass rounded-3xl shadow-2xl shadow-gray-200/50 p-8 sm:p-10 border border-white/[0.06]">
                   <div className="grid grid-cols-2 gap-6">
                     {[
                       { value: '98%', label: 'Patient Satisfaction', gradient: 'from-green-500 to-emerald-500' },
@@ -168,7 +168,7 @@ const About = () => {
                         <div className={`w-14 h-14 bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg`}>
                           <span className="text-xl font-bold text-white">{item.value}</span>
                         </div>
-                        <div className="font-semibold text-gray-900">{item.label}</div>
+                        <div className="font-semibold text-white">{item.label}</div>
                       </div>
                     ))}
                   </div>
@@ -179,31 +179,31 @@ const About = () => {
         </section>
 
         {/* Values */}
-        <section className="py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-blue-50/50">
+        <section className="py-20 lg:py-28 bg-transparent">
           <div className="container-custom">
             <div className="text-center mb-16">
-              <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+              <span className="inline-flex items-center px-4 py-1.5 bg-emerald-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
                 <Heart className="w-4 h-4 mr-1.5" />
                 Our Values
               </span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
                 What We Stand For
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                 The principles that guide everything we do
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {values.map((value, index) => (
-                <div key={index} className="group bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-primary-100 transition-all duration-300">
+                <div key={index} className="group dark-glass rounded-2xl p-8 border border-white/[0.06] hover:shadow-xl hover:border-primary-100 transition-all duration-300">
                   <div className={`w-16 h-16 bg-gradient-to-br ${value.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300`}>
                     <value.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     {value.description}
                   </p>
                 </div>
@@ -213,17 +213,17 @@ const About = () => {
         </section>
 
         {/* Team */}
-        <section className="py-20 lg:py-28 bg-white">
+        <section className="py-20 lg:py-28 dark-glass">
           <div className="container-custom">
             <div className="text-center mb-16">
-              <span className="inline-flex items-center px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
+              <span className="inline-flex items-center px-4 py-1.5 bg-emerald-500/10 text-primary-700 rounded-full text-sm font-medium border border-primary-100 mb-4">
                 <Users className="w-4 h-4 mr-1.5" />
                 Our Team
               </span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
                 Meet Our Team
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                 The passionate people behind DocCare
               </p>
             </div>
@@ -234,9 +234,9 @@ const About = () => {
                   <div className={`w-28 h-28 bg-gradient-to-br ${member.gradient} rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-xl group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300`}>
                     <span className="text-3xl font-bold text-white">{member.avatar}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                  <p className="text-primary-600 font-semibold mb-2">{member.role}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.desc}</p>
+                  <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                  <p className="text-emerald-400 font-semibold mb-2">{member.role}</p>
+                  <p className="text-gray-300 text-sm leading-relaxed">{member.desc}</p>
                 </div>
               ))}
             </div>
@@ -244,7 +244,7 @@ const About = () => {
         </section>
 
         {/* CTA */}
-        <section className="relative py-20 lg:py-24 bg-gradient-to-r from-primary-600 via-primary-700 to-purple-700 overflow-hidden">
+        <section className="relative py-20 lg:py-24 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 overflow-hidden">
           <div className="absolute inset-0 bg-grid opacity-[0.05]"></div>
           <div className="container-custom relative text-center">
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">

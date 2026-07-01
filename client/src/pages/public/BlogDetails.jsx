@@ -41,15 +41,15 @@ const BlogDetails = () => {
 
   if (loading) {
     return (
-      <div className="pt-16 bg-gradient-to-br from-purple-50 via-white to-blue-50 min-h-screen">
+      <div className="pt-16 bg-transparent min-h-screen">
         <div className="container-custom section-padding">
           <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-            <div className="h-96 bg-gray-200 rounded-2xl"></div>
+            <div className="h-8 bg-white/[0.06] rounded w-1/4"></div>
+            <div className="h-96 bg-white/[0.06] rounded-2xl"></div>
             <div className="space-y-3">
-              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-              <div className="h-4 bg-gray-200 rounded"></div>
-              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-4 bg-white/[0.06] rounded w-3/4"></div>
+              <div className="h-4 bg-white/[0.06] rounded"></div>
+              <div className="h-4 bg-white/[0.06] rounded w-5/6"></div>
             </div>
           </div>
         </div>
@@ -59,14 +59,14 @@ const BlogDetails = () => {
 
   if (!blog) {
     return (
-      <div className="pt-16 bg-gradient-to-br from-purple-50 via-white to-blue-50 min-h-screen">
+      <div className="pt-16 bg-transparent min-h-screen">
         <div className="container-custom section-padding">
           <div className="text-center py-16">
-            <div className="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <div className="w-20 h-20 bg-white/[0.06] rounded-2xl flex items-center justify-center mx-auto mb-4">
               <MessageSquare className="w-10 h-10 text-gray-400" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Blog post not found</h2>
-            <p className="text-gray-600 mb-6">The blog post you're looking for doesn't exist.</p>
+            <h2 className="text-2xl font-bold text-white mb-2">Blog post not found</h2>
+            <p className="text-gray-300 mb-6">The blog post you're looking for doesn't exist.</p>
             <Link to="/blogs" className="btn-primary">Back to Blogs</Link>
           </div>
         </div>
@@ -84,16 +84,16 @@ const BlogDetails = () => {
         <meta property="og:image" content={blog.image} />
       </Helmet>
 
-      <div className="pt-16 bg-gradient-to-br from-purple-50 via-white to-blue-50 min-h-screen">
+      <div className="pt-16 bg-transparent min-h-screen">
         <div className="container-custom section-padding">
-          <Link to="/blogs" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6 font-medium group">
+          <Link to="/blogs" className="inline-flex items-center text-gray-300 hover:text-white mb-6 font-medium group">
             <ChevronLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" />
             Back to Blogs
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3">
-              <article className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+              <article className="dark-glass rounded-2xl shadow-xl shadow-gray-200/50 border border-white/[0.06] overflow-hidden">
                 <div className="relative">
                   <img src={blog.image} alt={blog.title} className="w-full h-72 md:h-96 object-cover" />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent h-24"></div>
@@ -101,38 +101,38 @@ const BlogDetails = () => {
                 </div>
 
                 <div className="p-8 md:p-10">
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
                     <span className="flex items-center"><Clock className="w-4 h-4 mr-1.5" />{blog.readTime} min read</span>
                     <span className="flex items-center"><Calendar className="w-4 h-4 mr-1.5" />{formatDate(blog.date)}</span>
                     <span className="flex items-center"><User className="w-4 h-4 mr-1.5" />{blog.author}</span>
                   </div>
 
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">{blog.title}</h1>
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">{blog.title}</h1>
 
-                  <div className="flex items-center justify-between gap-4 pb-8 border-b border-gray-200 mb-8">
+                  <div className="flex items-center justify-between gap-4 pb-8 border-b border-white/[0.08] mb-8">
                     <div className="flex items-center gap-3">
-                      <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 transition-all">
+                      <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/[0.03] text-gray-300 border border-white/[0.08] hover:bg-white/[0.06] transition-all">
                         <Heart className="w-4 h-4" />{blog.likes}
                       </button>
-                      <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 transition-all">
+                      <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/[0.03] text-gray-300 border border-white/[0.08] hover:bg-white/[0.06] transition-all">
                         <MessageSquare className="w-4 h-4" />{blog.comments}
                       </button>
                     </div>
-                    <button onClick={handleShare} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 transition-all">
+                    <button onClick={handleShare} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/[0.03] text-gray-300 border border-white/[0.08] hover:bg-white/[0.06] transition-all">
                       <Share2 className="w-4 h-4" />Share
                     </button>
                   </div>
 
-                  <div className="prose prose-lg max-w-none mb-10 text-gray-700 leading-relaxed whitespace-pre-line">
+                  <div className="prose prose-lg max-w-none mb-10 text-gray-200 leading-relaxed whitespace-pre-line">
                     {blog.content}
                   </div>
 
                   {blog.tags && blog.tags.length > 0 && (
                     <div className="mb-8">
-                      <h3 className="text-lg font-bold text-gray-900 mb-3">Tags</h3>
+                      <h3 className="text-lg font-bold text-white mb-3">Tags</h3>
                       <div className="flex flex-wrap gap-2">
                         {blog.tags.map((tag, i) => (
-                          <span key={i} className="inline-flex items-center px-3.5 py-1.5 bg-gray-50 text-gray-700 rounded-xl text-sm border border-gray-200">
+                          <span key={i} className="inline-flex items-center px-3.5 py-1.5 bg-white/[0.08] text-gray-300 rounded-xl text-sm border border-white/[0.08]">
                             <Tag className="w-3 h-3 mr-1.5" />{tag}
                           </span>
                         ))}
@@ -144,25 +144,25 @@ const BlogDetails = () => {
             </div>
 
             <div className="lg:col-span-1 space-y-6">
-              <div className="bg-white rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 p-6 text-center">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">About Author</h3>
+              <div className="dark-glass rounded-2xl shadow-lg shadow-gray-200/50 border border-white/[0.06] p-6 text-center">
+                <h3 className="text-lg font-bold text-white mb-4">About Author</h3>
                 <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-2xl">
                   {blog.author?.charAt(0)}
                 </div>
-                <h4 className="font-bold text-gray-900">{blog.author}</h4>
-                <p className="text-gray-500 text-sm">Medical Writer</p>
+                <h4 className="font-bold text-white">{blog.author}</h4>
+                <p className="text-gray-400 text-sm">Medical Writer</p>
               </div>
 
               {relatedBlogs.length > 0 && (
-                <div className="bg-white rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 p-6">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Related Posts</h3>
+                <div className="dark-glass rounded-2xl shadow-lg shadow-gray-200/50 border border-white/[0.06] p-6">
+                  <h3 className="text-lg font-bold text-white mb-4">Related Posts</h3>
                   <div className="space-y-4">
                     {relatedBlogs.map((rb) => (
                       <Link key={rb.id} to={`/blogs/${rb.slug}`} className="group flex gap-3">
                         <img src={rb.image} alt={rb.title} className="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
                         <div className="min-w-0">
-                          <p className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors">{rb.title}</p>
-                          <p className="text-xs text-gray-500 mt-1">{rb.readTime} min read</p>
+                          <p className="text-sm font-semibold text-white line-clamp-2 group-hover:text-emerald-400 transition-colors">{rb.title}</p>
+                          <p className="text-xs text-gray-400 mt-1">{rb.readTime} min read</p>
                         </div>
                       </Link>
                     ))}
