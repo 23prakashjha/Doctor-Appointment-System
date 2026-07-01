@@ -98,6 +98,7 @@ const Login = () => {
                     <Mail className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
+                    id="email"
                     {...register('email', {
                       required: 'Email is required',
                       pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' },
@@ -121,6 +122,7 @@ const Login = () => {
                     <Lock className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
+                    id="password"
                     {...register('password', {
                       required: 'Password is required',
                       minLength: { value: 6, message: 'Password must be at least 6 characters' },
