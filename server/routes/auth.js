@@ -47,15 +47,11 @@ router.post('/register', async (req, res) => {
       });
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Create new user
+    // Create new user (password is hashed by User model pre-save hook)
     const user = new User({
       name,
       email,
-      password: hashedPassword,
+      password,
       phone,
       age,
       gender,
@@ -256,12 +252,8 @@ router.post('/reset-password', async (req, res) => {
       });
     }
 
-    // Hash new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-    // Update password
-    user.password = hashedPassword;
+    // Update password (hashed by User model pre-save hook)
+    user.password = newPassword;
     await user.save();
 
     res.json({
