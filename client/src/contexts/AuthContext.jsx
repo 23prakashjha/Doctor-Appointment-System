@@ -65,16 +65,18 @@ const authReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState)
 
-  // Set token in axios defaults
+  // Persist auth state to localStorage
   useEffect(() => {
     if (state.token) {
       localStorage.setItem('token', state.token)
+      localStorage.setItem('user', JSON.stringify(state.user))
       authAPI.defaults.headers.common['Authorization'] = `Bearer ${state.token}`
     } else {
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
       delete authAPI.defaults.headers.common['Authorization']
     }
-  }, [state.token])
+  }, [state.token, state.user])
 
   // Check if user is authenticated on mount
   useEffect(() => {
@@ -117,6 +119,9 @@ export const AuthProvider = ({ children }) => {
       if (response.data.success) {
         const { user, doctor, token } = response.data.data
         
+        localStorage.setItem('token', token)
+        localStorage.setItem('user', JSON.stringify(user))
+        
         dispatch({
           type: 'LOGIN_SUCCESS',
           payload: {
@@ -127,7 +132,7 @@ export const AuthProvider = ({ children }) => {
         })
         
         toast.success('Login successful!')
-        return { success: true }
+        return { success: true, user }
       } else {
         dispatch({ type: 'LOGIN_FAILURE' })
         toast.error(response.data.message || 'Login failed')

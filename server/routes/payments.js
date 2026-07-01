@@ -228,6 +228,76 @@ router.get('/history', auth, async (req, res) => {
   }
 });
 
+// Get payment statistics (for doctors)
+router.get('/stats', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'doctor') {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied. Only doctors can view payment statistics.'
+      });
+    }
+
+    const Doctor = require('../models/Doctor');
+    const doctor = await Doctor.findOne({ userId: req.user.userId });
+    
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor profile not found'
+      });
+    }
+
+    // Get payment statistics
+    const totalEarnings = await Payment.aggregate([
+      { $match: { doctorId: doctor._id, status: 'completed' } },
+      { $group: { _id: null, total: { $sum: '$amount' }, count: { $sum: 1 } } }
+    ]);
+
+    // Get monthly earnings (last 6 months)
+    const monthlyEarnings = await Payment.aggregate([
+      {
+        $match: {
+          doctorId: doctor._id,
+          status: 'completed',
+          paymentDate: { $gte: new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000) }
+        }
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m', date: '$paymentDate' } },
+          total: { $sum: '$amount' },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
+
+    // Get recent payments
+    const recentPayments = await Payment.find({ doctorId: doctor._id })
+      .populate('patientId', 'name')
+      .sort({ paymentDate: -1 })
+      .limit(5);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        totalEarnings: totalEarnings[0]?.total || 0,
+        totalTransactions: totalEarnings[0]?.count || 0,
+        monthlyEarnings,
+        recentPayments
+      }
+    });
+  } catch (error) {
+    console.error('Get payment stats error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch payment statistics',
+      error: error.message
+    });
+  }
+});
+
 // Get payment by ID
 router.get('/:id', auth, async (req, res) => {
   try {
@@ -344,76 +414,6 @@ router.post('/:id/refund', auth, [
     res.status(500).json({
       success: false,
       message: 'Failed to process refund',
-      error: error.message
-    });
-  }
-});
-
-// Get payment statistics (for doctors)
-router.get('/stats', auth, async (req, res) => {
-  try {
-    if (req.user.role !== 'doctor') {
-      return res.status(403).json({
-        success: false,
-        message: 'Access denied. Only doctors can view payment statistics.'
-      });
-    }
-
-    const Doctor = require('../models/Doctor');
-    const doctor = await Doctor.findOne({ userId: req.user.userId });
-    
-    if (!doctor) {
-      return res.status(404).json({
-        success: false,
-        message: 'Doctor profile not found'
-      });
-    }
-
-    // Get payment statistics
-    const totalEarnings = await Payment.aggregate([
-      { $match: { doctorId: doctor._id, status: 'completed' } },
-      { $group: { _id: null, total: { $sum: '$amount' }, count: { $sum: 1 } } }
-    ]);
-
-    // Get monthly earnings (last 6 months)
-    const monthlyEarnings = await Payment.aggregate([
-      {
-        $match: {
-          doctorId: doctor._id,
-          status: 'completed',
-          paymentDate: { $gte: new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000) }
-        }
-      },
-      {
-        $group: {
-          _id: { $dateToString: { format: '%Y-%m', date: '$paymentDate' } },
-          total: { $sum: '$amount' },
-          count: { $sum: 1 }
-        }
-      },
-      { $sort: { _id: 1 } }
-    ]);
-
-    // Get recent payments
-    const recentPayments = await Payment.find({ doctorId: doctor._id })
-      .populate('patientId', 'name')
-      .sort({ paymentDate: -1 })
-      .limit(5);
-
-    res.status(200).json({
-      success: true,
-      data: {
-        totalEarnings: totalEarnings[0]?.total || 0,
-        totalTransactions: totalEarnings[0]?.count || 0,
-        monthlyEarnings,
-        recentPayments
-      }
-    });
-  } catch (error) {
-    console.error('Get payment stats error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch payment statistics',
       error: error.message
     });
   }

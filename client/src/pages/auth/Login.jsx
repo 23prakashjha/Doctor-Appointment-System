@@ -21,7 +21,7 @@ const Login = () => {
     const result = await login(data)
 
     if (result.success) {
-      const user = JSON.parse(localStorage.getItem('user'))
+      const user = result.user
       if (user?.role === 'doctor') {
         navigate('/dashboard/doctor')
       } else if (user?.role === 'admin') {

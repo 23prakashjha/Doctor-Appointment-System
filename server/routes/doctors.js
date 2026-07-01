@@ -85,6 +85,132 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get doctor's own profile (for authenticated doctors)
+router.get('/profile/me', auth, async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.user.userId })
+      .populate('userId', 'name email profilePicture');
+
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor profile not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      data: { doctor }
+    });
+  } catch (error) {
+    console.error('Get doctor profile error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch doctor profile',
+      error: error.message
+    });
+  }
+});
+
+// Get doctor's appointments (for authenticated doctors)
+router.get('/my-appointments', auth, async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.user.userId });
+
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor profile not found'
+      });
+    }
+
+    const Appointment = require('../models/Appointment');
+    const { page = 1, limit = 10, status } = req.query;
+    const filter = { doctorId: doctor._id };
+
+    if (status) {
+      filter.status = status;
+    }
+
+    const appointments = await Appointment.find(filter)
+      .populate('patientId', 'name email profilePicture')
+      .sort({ date: -1, time: -1 })
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit));
+
+    const total = await Appointment.countDocuments(filter);
+
+    res.json({
+      success: true,
+      data: {
+        appointments,
+        pagination: {
+          current: parseInt(page),
+          pages: Math.ceil(total / parseInt(limit)),
+          total
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Get doctor appointments error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch appointments',
+      error: error.message
+    });
+  }
+});
+
+// Get doctor stats (for authenticated doctors)
+router.get('/stats', auth, async (req, res) => {
+  try {
+    const doctor = await Doctor.findOne({ userId: req.user.userId });
+
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor profile not found'
+      });
+    }
+
+    const Appointment = require('../models/Appointment');
+
+    const totalAppointments = await Appointment.countDocuments({ doctorId: doctor._id });
+    const upcomingAppointments = await Appointment.countDocuments({
+      doctorId: doctor._id,
+      date: { $gte: new Date() },
+      status: { $in: ['pending', 'confirmed'] }
+    });
+    const completedAppointments = await Appointment.countDocuments({
+      doctorId: doctor._id,
+      status: 'completed'
+    });
+    const cancelledAppointments = await Appointment.countDocuments({
+      doctorId: doctor._id,
+      status: 'cancelled'
+    });
+    const totalPatients = await Appointment.distinct('patientId', { doctorId: doctor._id });
+
+    res.json({
+      success: true,
+      data: {
+        totalAppointments,
+        upcomingAppointments,
+        completedAppointments,
+        cancelledAppointments,
+        totalPatients: totalPatients.length
+      }
+    });
+  } catch (error) {
+    console.error('Get doctor stats error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch doctor stats',
+      error: error.message
+    });
+  }
+});
+
 // Get single doctor by ID
 router.get('/:id', async (req, res) => {
   try {
@@ -220,33 +346,6 @@ router.put('/profile', auth, async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to update profile',
-      error: error.message
-    });
-  }
-});
-
-// Get doctor's own profile (for authenticated doctors)
-router.get('/profile/me', auth, async (req, res) => {
-  try {
-    const doctor = await Doctor.findOne({ userId: req.user.userId })
-      .populate('userId', 'name email profilePicture');
-
-    if (!doctor) {
-      return res.status(404).json({
-        success: false,
-        message: 'Doctor profile not found'
-      });
-    }
-
-    res.json({
-      success: true,
-      data: { doctor }
-    });
-  } catch (error) {
-    console.error('Get doctor profile error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch doctor profile',
       error: error.message
     });
   }
